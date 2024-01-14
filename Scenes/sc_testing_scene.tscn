@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfnjtj1tlyohh"]
+
+[ext_resource type="Texture2D" uid="uid://cmp3q6u68u12h" path="res://icon.svg" id="1_cwkvg"]
+[ext_resource type="Script" path="res://Scripts/SR_RengokuController.gd" id="1_qsh43"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q4ug"]
+size = Vector2(128, 128)
+
+[node name="SC_TestingScene" type="Node"]
+
+[node name="EntityController" type="Node2D" parent="."]
+
+[node name="SC_PlayerRengoku" type="CharacterBody2D" parent="EntityController"]
+script = ExtResource("1_qsh43")
+
+[node name="PlayerCam" type="Camera2D" parent="EntityController/SC_PlayerRengoku"]
+
+[node name="RengokuSprite" type="Sprite2D" parent="EntityController/SC_PlayerRengoku"]
+texture = ExtResource("1_cwkvg")
+
+[node name="RengokuCollision" type="CollisionShape2D" parent="EntityController/SC_PlayerRengoku"]
+shape = SubResource("RectangleShape2D_1q4ug")
