@@ -10,6 +10,6 @@ config_version=5
 
 [application]
 
-config/name="Project Rengoku"
+config/name="Project Fragarach"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
