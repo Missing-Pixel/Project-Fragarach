@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dfnjtj1tlyohh"]
+
+[node name="InitializedTree" type="Node2D"]
+
+[node name="TestingTree" type="Node2D" parent="."]
+
+[node name="MainCamera" type="Camera2D" parent="TestingTree"]
+z_index = 5
