@@ -6,3 +6,5 @@
 
 [node name="MainCamera" type="Camera2D" parent="TestingTree"]
 z_index = 5
+
+[node name="CardManager" type="Node2D" parent="TestingTree"]
