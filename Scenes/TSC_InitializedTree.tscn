@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=4 format=3 uid="uid://dfnjtj1tlyohh"]
+
+[ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_uac7e"]
+[ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_yebv8"]
+[ext_resource type="Script" path="res://Scripts/sc_input_manager.gd" id="3_jpkkb"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -7,6 +11,13 @@
 [node name="MainCamera" type="Camera2D" parent="TestingTree"]
 z_index = 5
 
-[node name="Character" type="Node2D" parent="."]
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_uac7e")
 
-[node name="Card Manager" type="Node2D" parent="Character"]
+[node name="CardManager" type="Node2D" parent="Player"]
+script = ExtResource("2_yebv8")
+
+[node name="GlobalVariables" type="Node2D" parent="."]
+
+[node name="InputManager" type="Node2D" parent="GlobalVariables"]
+script = ExtResource("3_jpkkb")

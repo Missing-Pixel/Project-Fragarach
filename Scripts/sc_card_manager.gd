@@ -15,17 +15,17 @@ enum CardAttacks { PUNCH=1, KICK=2, HEAVY_PUNCH=3, HEAVY_KICK=4}
 var card_state: CardState = CardState.DRAW
 var deck_pile: Array = []
 var card_slots = {
-	"A": [0, false], 
-	"B": [0, false], 
-	"C": [0, false], 
-	"D": [0, false]
+	1: [0, false], 
+	2: [0, false], 
+	3: [0, false], 
+	4: [0, false]
 	}
 var card_queue: Array = []
 var discard_pile: Array = []
 
 # Create deck based on count of each card type
 # REFACTOR ONCE DECK BUILDING FINISHED
-func create_deck():
+func _create_deck():
 	for i in range(punch_count):
 		deck_pile.append(CardAttacks.PUNCH)
 	for i in range(kick_count):
@@ -36,7 +36,7 @@ func create_deck():
 		deck_pile.append(CardAttacks.HEAVY_KICK)
 
 # Draw cards and put them into the four card slots
-func draw_phase():
+func _draw_phase():
 	var rand_index: int = 0
 	
 	# If deck_pile size < 4, pull from discard_pile
@@ -52,10 +52,12 @@ func draw_phase():
 	
 	card_state = CardState.QUEUE
 
+# If in queue state, be able to (de)select cards
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	create_deck()
-	draw_phase()
+	_create_deck()
+	_draw_phase()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
