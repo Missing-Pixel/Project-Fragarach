@@ -53,6 +53,22 @@ func _draw_phase():
 	card_state = CardState.QUEUE
 
 # If in queue state, be able to (de)select cards
+func _on_player_selected_card(card_slot_value):
+	if (card_state == CardState.QUEUE):
+		if (card_slots[card_slot_value][1] == false):
+			card_slots[card_slot_value][1] = true
+			card_queue.append(card_slot_value)
+		else:
+			card_slots[card_slot_value][1] = false
+			card_queue.erase(card_slot_value)
+
+# If in queue state, add the active card slots' attack IDs to the attack queue
+func _on_player_started_combo():
+	if (card_state == CardState.QUEUE):
+		card_state = CardState.DISCARD
+		for k in card_queue:
+			## append card_slots[k][0] to attack handler's attack_queue 
+			pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -62,8 +78,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# In Discard state, if card queue empty change to Draw
 	pass
-
-
-func _on_player_selected_card(card_slot_value):
-	pass # Replace with function body.
+	
+	## ATK signal: In Discard state if attack queue is smaller than card queue:
+			# move card from card queue to discard pile
+	## KD signal: In player's KD state, empty card queue onto discard pile

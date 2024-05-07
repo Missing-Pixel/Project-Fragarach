@@ -21,3 +21,6 @@ script = ExtResource("2_yebv8")
 
 [node name="InputManager" type="Node2D" parent="GlobalVariables"]
 script = ExtResource("3_jpkkb")
+
+[connection signal="selected_card" from="Player" to="Player/CardManager" method="_on_player_selected_card"]
+[connection signal="started_combo" from="Player" to="Player/CardManager" method="_on_player_started_combo"]

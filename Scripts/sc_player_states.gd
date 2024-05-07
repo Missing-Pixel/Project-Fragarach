@@ -4,6 +4,7 @@ extends CharacterStates
 
 signal moved_player(velocity)
 signal selected_card(card_slot_value)
+signal started_combo()
 
 var input_velocity: Array = [0, 0]
 
@@ -18,8 +19,14 @@ func _on_input_move(x, y):
 # Input applicable in IDLE and MOVING states
 func _on_input_select_card(card_slot):
 	if (current_state == States.IDLE or current_state == States.MOVING):
-		# Relay info into new signal
 		selected_card.emit(card_slot)
+
+# Relay initiating combo to card management script
+# Input applicable in IDLE and MOVING states
+func _on_input_start_combo():
+	if (current_state == States.IDLE or current_state == States.MOVING):
+			started_combo.emit()
+			current_state = States.ATTACKING
 
 # Check if array has only zeroes
 func _check_all_zero(array):
@@ -34,6 +41,7 @@ func _ready():
 	var input_manager = $"../GlobalVariables/InputManager"
 	input_manager.inputted_move_player.connect(_on_input_move)
 	input_manager.inputted_select_card.connect(_on_input_select_card)
+	input_manager.inputted_start_combo.connect(_on_input_start_combo)
 	
 	current_state = States.IDLE
 
