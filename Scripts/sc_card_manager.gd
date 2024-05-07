@@ -4,10 +4,10 @@ extends Node
 
 # Prototype variables until deck building is finished
 # DELETE WHEN REFACTORING
-@export var punch_count = 0
-@export var kick_count = 0
-@export var heavy_punch_count = 0
-@export var heavy_kick_count = 0
+@export var punch_count = 2
+@export var kick_count = 2
+@export var heavy_punch_count = 2
+@export var heavy_kick_count = 2
 
 
 enum CardState { DRAW, QUEUE, DISCARD } 
