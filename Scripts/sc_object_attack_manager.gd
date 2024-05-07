@@ -18,6 +18,8 @@ func add_attack(attack_id):
 ## On Signal: When animation finished, play next attack and remove 1 card
 ## change to idle if no more attacks
 
+## On Signal: When hitbox connects, relay damage values to recipient
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
