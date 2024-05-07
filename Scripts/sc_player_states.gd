@@ -4,10 +4,11 @@ extends CharacterStates
 
 # The following signals would need to be manually connected to noted scripts
 signal moved_player(velocity) # Movement
-signal selected_card(card_slot_value) # CardManager
-signal started_combo() # CardManager
 
 var input_velocity: Array = [0, 0]
+
+var node_card_manager: Node
+var node_attack_manager: Node
 
 # Relay move player signal to movement script
 func _on_input_move(x, y):
@@ -18,28 +19,24 @@ func _on_input_move(x, y):
 # Relay select card signal to card management script
 func _on_input_select_card(card_slot):
 	if (current_state == States.IDLE or current_state == States.MOVING):
-		selected_card.emit(card_slot)
+		node_card_manager.select_card(card_slot)
 
 # Relay initiating combo to card management script
 func _on_input_start_combo():
 	if (current_state == States.IDLE or current_state == States.MOVING):
-			started_combo.emit()
+			node_card_manager.start_combo()
 			current_state = States.ATTACKING
-
-# Check if array has only zeroes
-func _check_all_zero(array):
-	for i in array:
-			if (i != 0):
-				return false
-	return true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Connect signals
+	# Link input signals and node components
 	var input_manager = $"../GlobalVariables/InputManager"
 	input_manager.inputted_move_player.connect(_on_input_move)
 	input_manager.inputted_select_card.connect(_on_input_select_card)
 	input_manager.inputted_start_combo.connect(_on_input_start_combo)
+	_child_node_link(node_card_manager, "_create_deck")
+	_child_node_link(node_attack_manager, "add_attack")
+	
 	
 	current_state = States.IDLE
 

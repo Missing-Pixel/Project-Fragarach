@@ -4,12 +4,14 @@ extends Node
 
 # Prototype variables until deck building is finished
 # DELETE WHEN REFACTORING
+@export_group("Prototype")
 @export var punch_count = 2
 @export var kick_count = 2
 @export var heavy_punch_count = 2
 @export var heavy_kick_count = 2
+@export_group("")
 
-
+signal added_attack(attack_id)
 enum CardState { DRAW, QUEUE, DISCARD } 
 enum CardAttacks { PUNCH=1, KICK=2, HEAVY_PUNCH=3, HEAVY_KICK=4}
 var card_state: CardState = CardState.DRAW
@@ -35,6 +37,23 @@ func _create_deck():
 	for i in range(heavy_kick_count):
 		deck_pile.append(CardAttacks.HEAVY_KICK)
 
+# If in queue state, be able to (de)select cards
+func select_card(card_slot_value):
+	if (card_state == CardState.QUEUE):
+		if (card_slots[card_slot_value][1] == false):
+			card_slots[card_slot_value][1] = true
+			card_queue.append(card_slot_value)
+		else:
+			card_slots[card_slot_value][1] = false
+			card_queue.erase(card_slot_value)
+
+# If in queue state, add the active card slots' attack IDs to the attack queue
+func start_combo():
+	if (card_state == CardState.QUEUE):
+		for k in card_queue:
+			get_parent().node_attack_manager.add_attack(card_slots[k][0])
+		card_state = CardState.DISCARD
+
 # Draw cards and put them into the four card slots
 func _draw_phase():
 	var rand_index: int = 0
@@ -51,24 +70,6 @@ func _draw_phase():
 		deck_pile.remove_at(rand_index)
 	
 	card_state = CardState.QUEUE
-
-# If in queue state, be able to (de)select cards
-func _on_player_selected_card(card_slot_value):
-	if (card_state == CardState.QUEUE):
-		if (card_slots[card_slot_value][1] == false):
-			card_slots[card_slot_value][1] = true
-			card_queue.append(card_slot_value)
-		else:
-			card_slots[card_slot_value][1] = false
-			card_queue.erase(card_slot_value)
-
-# If in queue state, add the active card slots' attack IDs to the attack queue
-func _on_player_started_combo():
-	if (card_state == CardState.QUEUE):
-		card_state = CardState.DISCARD
-		for k in card_queue:
-			## append card_slots[k][0] to attack handler's attack_queue 
-			pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
