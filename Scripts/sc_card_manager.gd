@@ -25,18 +25,6 @@ var card_slots = {
 var card_queue: Array = []
 var discard_pile: Array = []
 
-# Create deck based on count of each card type
-# REFACTOR ONCE DECK BUILDING FINISHED
-func _create_deck():
-	for i in range(punch_count):
-		deck_pile.append(CardAttacks.PUNCH)
-	for i in range(kick_count):
-		deck_pile.append(CardAttacks.KICK)
-	for i in range(heavy_punch_count):
-		deck_pile.append(CardAttacks.HEAVY_PUNCH)
-	for i in range(heavy_kick_count):
-		deck_pile.append(CardAttacks.HEAVY_KICK)
-
 # If in queue state, be able to (de)select cards
 func select_card(card_slot_value):
 	if (card_state == CardState.QUEUE):
@@ -53,6 +41,33 @@ func start_combo():
 		for k in card_queue:
 			get_parent().node_attack_manager.add_attack(card_slots[k][0])
 		card_state = CardState.DISCARD
+
+# Remove latest card slot in queue and send it to discard pile.
+# Change card state to DRAW is queue is empty 
+func discard_front_card():
+	var k: int = card_queue[0]
+	discard_pile.append(card_slots[k][0])
+	card_slots[k][1] = false
+	card_queue.remove_at(0)
+	if card_queue.is_empty():
+		card_state = CardState.DRAW
+
+# Empty entire card queue and put it into discard pile
+func empty_card_queue():
+	while not(card_queue.is_empty()):
+		discard_front_card()
+
+# Create deck based on count of each card type
+# REFACTOR ONCE DECK BUILDING FINISHED
+func _create_deck():
+	for i in range(punch_count):
+		deck_pile.append(CardAttacks.PUNCH)
+	for i in range(kick_count):
+		deck_pile.append(CardAttacks.KICK)
+	for i in range(heavy_punch_count):
+		deck_pile.append(CardAttacks.HEAVY_PUNCH)
+	for i in range(heavy_kick_count):
+		deck_pile.append(CardAttacks.HEAVY_KICK)
 
 # Draw cards and put them into the four card slots
 func _draw_phase():
