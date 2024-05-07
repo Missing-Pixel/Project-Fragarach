@@ -11,8 +11,8 @@ var input_velocity: Array = [0, 0]
 
 # Relay move player signal to movement script
 func _on_input_move(x, y):
+	input_velocity = [x, y]
 	if (current_state == States.IDLE or current_state == States.MOVING):
-		input_velocity = [x, y]
 		moved_player.emit(input_velocity)
 
 # Relay select card signal to card management script
