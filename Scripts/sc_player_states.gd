@@ -5,7 +5,7 @@ extends CharacterStates
 signal showed_player_position(parent_pos)
 
 var node_card_manager: Node
-var node_attack_manager: Node
+var node_action_manager: Node
 var node_move_manager: Node
 
 # Relay move player signal to movement script
@@ -32,7 +32,7 @@ func _ready():
 	Input_Manager.inputted_select_card.connect(_on_input_select_card)
 	Input_Manager.inputted_start_combo.connect(_on_input_start_combo)
 	node_card_manager = _child_node_link("select_card")
-	node_attack_manager = _child_node_link("add_attack")
+	node_action_manager = _child_node_link("add_attack")
 	node_move_manager = _child_node_link("update_velocity")
 	_list_sprite_nodes()
 	
@@ -48,5 +48,7 @@ func _process(_delta):
 	# Switches between IDLE and MOVING states depending on whether player moves
 	if (current_state == States.IDLE and not _check_all_zero(input_velocity)):
 		current_state = States.MOVING
+		node_action_manager.play_moving()
 	elif (current_state == States.MOVING and _check_all_zero(input_velocity)):
 		current_state = States.IDLE
+		node_action_manager.play_idle()
