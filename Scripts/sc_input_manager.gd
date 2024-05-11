@@ -22,18 +22,13 @@ func _emit_level_move_player():
 	var vel_x = Input.get_axis("Move Left", "Move Right")
 	var vel_y = Input.get_axis("Move Up", "Move Down")
 	
-	if not(vel_x == 0 or vel_y == 0):
+	if not(vel_x == 0 and vel_y == 0):
 		inputted_move_player.emit(vel_x, vel_y)
 		is_moving = true
 	elif (is_moving == true):
 		# When letting go of inputs from moving, emit one (0,0) signal
 		inputted_move_player.emit(0, 0)
 		is_moving = false
-	
-	# -------------------------------------------------------------------------
-	# DEBUG
-	if not(vel_x == 0 or vel_y == 0):
-		print("Move vel: ", vel_x, ", ", vel_y)
 
 # Emit signals for card management controls
 func _emit_level_card_management():

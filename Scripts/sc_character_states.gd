@@ -18,10 +18,10 @@ func view_state():
 	return state_id
 
 # Link node variable to appropriate child node depending on example method string
-func _child_node_link(_var_node, example_method):
+func _child_node_link(example_method):
 	for child in get_children():
 		if child.has_method(example_method):
-			_var_node = child
+			return child
 
 # Check if array has only zeroes
 func _check_all_zero(array):
@@ -31,12 +31,12 @@ func _check_all_zero(array):
 	return true
 
 # Recursively look through all children  and appends list of nodes that are Sprite2D
-func _list_sprite_nodes():
-	for c in get_children():
+func _list_sprite_nodes(curr_node = self):
+	for c in curr_node.get_children():
 		if (c is Sprite2D):
 			nodes_sprites.append(c)
 		if (c.get_child_count() > 0):
-			_list_sprite_nodes()
+			_list_sprite_nodes(c)
 
 # Update all sprite nodes' z-index
 func _update_z_index():

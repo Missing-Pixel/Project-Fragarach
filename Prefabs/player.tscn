@@ -304,6 +304,7 @@ shape = SubResource("CapsuleShape2D_58dvy")
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("7_g0ns8")
+max_speed = 17.0
 
 [node name="HealthManager" type="Node" parent="."]
 script = ExtResource("4_7b03m")

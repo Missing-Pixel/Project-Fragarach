@@ -12,7 +12,7 @@ var node_move_manager: Node
 func _on_input_move(x, y):
 	input_velocity = [x, y]
 	if (current_state == States.IDLE or current_state == States.MOVING):
-		node_move_manager.update_player_vel(x, y)
+		node_move_manager.update_velocity(x, y)
 
 # Relay select card signal to card management script
 func _on_input_select_card(card_slot):
@@ -31,9 +31,9 @@ func _ready():
 	Input_Manager.inputted_move_player.connect(_on_input_move)
 	Input_Manager.inputted_select_card.connect(_on_input_select_card)
 	Input_Manager.inputted_start_combo.connect(_on_input_start_combo)
-	_child_node_link(node_card_manager, "_create_deck")
-	_child_node_link(node_attack_manager, "add_attack")
-	_child_node_link(node_move_manager, "update_velocity")
+	node_card_manager = _child_node_link("select_card")
+	node_attack_manager = _child_node_link("add_attack")
+	node_move_manager = _child_node_link("update_velocity")
 	_list_sprite_nodes()
 	
 	current_state = States.IDLE
