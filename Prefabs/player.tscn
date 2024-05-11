@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://3le30i5udicx"]
+[gd_scene load_steps=18 format=3 uid="uid://3le30i5udicx"]
 
 [ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_gi0sr"]
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="2_hk7pl"]
 [ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_vr3gl"]
 [ext_resource type="Script" path="res://Scripts/sc_object_action_manager.gd" id="2_y1uhq"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_7b03m"]
+[ext_resource type="Script" path="res://Scripts/sc_hitbox.gd" id="4_kp1b8"]
 [ext_resource type="PackedScene" uid="uid://jy4p14nm5mbi" path="res://Prefabs/Resources/Attacks/generic_attack.tscn" id="4_wv4ce"]
 [ext_resource type="Script" path="res://Scripts/sc_movement.gd" id="7_g0ns8"]
 
@@ -19,7 +20,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(-10.5, -18)]
 }
 tracks/1/type = "value"
@@ -55,7 +56,7 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(44, -45)]
 }
 tracks/4/type = "value"
@@ -67,7 +68,7 @@ tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [0.0]
 }
 tracks/5/type = "value"
@@ -79,7 +80,7 @@ tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(1, 1)]
 }
 tracks/6/type = "value"
@@ -91,7 +92,7 @@ tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [Vector2(1.115, 2.39)]
 }
 tracks/7/type = "value"
@@ -289,6 +290,7 @@ autoplay = "Player/player_idle"
 [node name="Hitbox" type="Area2D" parent="Moves"]
 collision_layer = 4
 collision_mask = 8
+script = ExtResource("4_kp1b8")
 
 [node name="HBox" type="CollisionShape2D" parent="Moves/Hitbox"]
 position = Vector2(44, -45)
@@ -316,3 +318,6 @@ script = ExtResource("4_7b03m")
 
 [node name="CardManager" type="Node" parent="."]
 script = ExtResource("2_vr3gl")
+
+[connection signal="animation_finished" from="Moves/AnimationPlayer" to="Moves" method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Moves/Hitbox" to="Moves" method="_on_hitbox_body_entered"]

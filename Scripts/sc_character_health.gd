@@ -23,7 +23,7 @@ enum DamageType { NONE=0, PUNCH=1, KICK=2 }
 @onready var curr_immunity: float = immunity_time
 
 # When receiving a damage signal, manage the health and knockback
-func _on_damage_received(damage, damage_type_id, kb_distance, kb_direction, is_knockdown):
+func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown):
 	if (curr_immunity < 0):
 		var final_damage: float = damage
 		var dmg_type_received: DamageType = damage_type_id

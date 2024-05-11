@@ -7,6 +7,7 @@ signal showed_player_position(parent_pos)
 var node_card_manager: Node
 var node_action_manager: Node
 var node_move_manager: Node
+var node_health_manager: Node
 
 # Relay move player signal to movement script
 func _on_input_move(x, y):
@@ -34,6 +35,7 @@ func _ready():
 	node_card_manager = _child_node_link("select_card")
 	node_action_manager = _child_node_link("add_attack")
 	node_move_manager = _child_node_link("update_velocity")
+	node_health_manager = _child_node_link("get_damaged")
 	_list_sprite_nodes()
 	
 	current_state = States.IDLE
