@@ -4,7 +4,6 @@ extends CharacterStates
 
 signal showed_player_position(parent_pos)
 
-var input_velocity: Array = [0, 0]
 var node_card_manager: Node
 var node_attack_manager: Node
 var node_move_manager: Node
@@ -34,16 +33,17 @@ func _ready():
 	Input_Manager.inputted_start_combo.connect(_on_input_start_combo)
 	_child_node_link(node_card_manager, "_create_deck")
 	_child_node_link(node_attack_manager, "add_attack")
-	_child_node_link(node_move_manager, "update_player_vel")
-	
+	_child_node_link(node_move_manager, "update_velocity")
+	_list_sprite_nodes()
 	
 	current_state = States.IDLE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	# Emit signal of player position while player is moving
+	# While moving: Emit signal of player position and update all sprite's z-index
 	if (current_state == States.MOVING):
-		showed_player_position.emit(get_parent().global_position)
+		showed_player_position.emit(self.global_position)
+		_update_z_index()
 	
 	# Switches between IDLE and MOVING states depending on whether player moves
 	if (current_state == States.IDLE and not _check_all_zero(input_velocity)):

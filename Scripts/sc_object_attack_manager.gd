@@ -3,7 +3,6 @@ extends Node
 ## Manages the queuing of attacks, and executing their animations
 ## Recieves hitbox data from a signal and sends it to the target
 
-@export var attack_anims: PackedStringArray
 var attack_queue: Array = []
 
 # Add attack ID to queue. If applicable, change parent character state to ATTACKING and start anim

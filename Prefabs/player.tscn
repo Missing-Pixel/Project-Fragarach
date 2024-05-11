@@ -1,11 +1,12 @@
-[gd_scene load_steps=16 format=3 uid="uid://3le30i5udicx"]
+[gd_scene load_steps=17 format=3 uid="uid://3le30i5udicx"]
 
 [ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_gi0sr"]
+[ext_resource type="Script" path="res://Scripts/sc_attack_animator.gd" id="2_1u36q"]
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="2_hk7pl"]
 [ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_vr3gl"]
 [ext_resource type="Script" path="res://Scripts/sc_object_attack_manager.gd" id="3_3emxb"]
-[ext_resource type="Script" path="res://Scripts/sc_player_movement.gd" id="3_d45wd"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_7b03m"]
+[ext_resource type="Script" path="res://Scripts/sc_movement.gd" id="7_g0ns8"]
 
 [sub_resource type="Animation" id="Animation_p84m8"]
 length = 0.001
@@ -268,6 +269,7 @@ script = ExtResource("1_gi0sr")
 [node name="Moves" type="CharacterBody2D" parent="."]
 collision_layer = 8
 collision_mask = 4
+script = ExtResource("2_1u36q")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Moves"]
 texture = ExtResource("2_hk7pl")
@@ -296,18 +298,18 @@ position = Vector2(-10.5, -18)
 shape = SubResource("RectangleShape2D_jbblf")
 debug_color = Color(0, 0.588235, 0, 0.419608)
 
-[node name="Movement" type="Node2D" parent="."]
-script = ExtResource("3_d45wd")
-
-[node name="HealthManager" type="Node2D" parent="."]
-script = ExtResource("4_7b03m")
-
-[node name="AttackManager" type="Node2D" parent="."]
-script = ExtResource("3_3emxb")
-
-[node name="CardManager" type="Node2D" parent="."]
-script = ExtResource("2_vr3gl")
-
 [node name="BaseCollision" type="CollisionShape2D" parent="."]
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_58dvy")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("7_g0ns8")
+
+[node name="HealthManager" type="Node" parent="."]
+script = ExtResource("4_7b03m")
+
+[node name="AttackManager" type="Node" parent="."]
+script = ExtResource("3_3emxb")
+
+[node name="CardManager" type="Node" parent="."]
+script = ExtResource("2_vr3gl")
