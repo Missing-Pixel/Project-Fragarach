@@ -58,20 +58,23 @@ func _relay_info(target):
 	hitbox_manager.base_damage, hitbox_manager.damage_type, 
 	hitbox_manager.base_kb_distance, vel_direction, hitbox_manager.is_knockdown)
 
-# Attack state: Play next attack and remove 1 card. 
-# Change to idle if no more attacks are in queue
+# Remove latest attack and card. Play next attack, otherwise change to idle if no more
+func _cycle_attack():
+	attack_queue.remove_at(0)
+	get_parent().node_card_manager.discard_front_card()
+	
+	if (attack_queue.size() > 0):
+		play_next_attack()
+	else:
+		get_parent().change_state(0)
+		play_idle()
+
+# Attack state: Cycle attacks
 # Knocked Down state: Check if character's health is 0. 
 # Engage death if true, change to idle if false
 func _on_animation_player_animation_finished(anim_name):
 	if (get_parent().view_state() == 2):
-		attack_queue.remove_at(0)
-		get_parent().node_card_manager.discard_front_card()
-		
-		if (attack_queue.size() > 0):
-			play_next_attack()
-		else:
-			get_parent().change_state(0)
-			play_idle()
+		_cycle_attack()
 	elif (get_parent().view_state() == 3):
 		if (health_manager.view_health() <= 0):
 			pass # Replace with calling death function
