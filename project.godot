@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Project Fragarach"
+run/main_scene="res://Scenes/TSC_InitializedTree.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -70,3 +71,14 @@ config/icon="res://icon.svg"
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":10,"pressure":0.0,"pressed":false,"script":null)
 ]
 }
+
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="characters"
+2d_physics/layer_3="hitbox"
+2d_physics/layer_4="hurtbox"
+2d_physics/layer_5="player_collision"
+2d_physics/layer_6="enemy_collision"
+2d_physics/layer_7="camera_lock"
+2d_physics/layer_8="level_transition"

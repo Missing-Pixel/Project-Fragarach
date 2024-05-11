@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=3 format=3 uid="uid://dfnjtj1tlyohh"]
 
-[ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_uac7e"]
-[ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_yebv8"]
-[ext_resource type="Script" path="res://Scripts/sc_object_attack_manager.gd" id="3_iqit7"]
+[ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
 [ext_resource type="Script" path="res://Scripts/sc_input_manager.gd" id="3_jpkkb"]
-[ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_pub1m"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -13,19 +10,9 @@
 [node name="MainCamera" type="Camera2D" parent="TestingTree"]
 z_index = 5
 
-[node name="Player" type="Node2D" parent="."]
-script = ExtResource("1_uac7e")
-
-[node name="CardManager" type="Node2D" parent="Player"]
-script = ExtResource("2_yebv8")
-
-[node name="AttackManager" type="Node2D" parent="Player"]
-script = ExtResource("3_iqit7")
-
-[node name="HealthManager" type="Node2D" parent="Player"]
-script = ExtResource("4_pub1m")
-
 [node name="GlobalVariables" type="Node2D" parent="."]
 
 [node name="InputManager" type="Node2D" parent="GlobalVariables"]
 script = ExtResource("3_jpkkb")
+
+[node name="Player" parent="." instance=ExtResource("2_5qtk0")]
