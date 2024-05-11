@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://3le30i5udicx"]
+[gd_scene load_steps=17 format=3 uid="uid://3le30i5udicx"]
 
 [ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_gi0sr"]
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="2_hk7pl"]
 [ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_vr3gl"]
 [ext_resource type="Script" path="res://Scripts/sc_object_action_manager.gd" id="2_y1uhq"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_7b03m"]
+[ext_resource type="PackedScene" uid="uid://jy4p14nm5mbi" path="res://Prefabs/Resources/Attacks/generic_attack.tscn" id="4_wv4ce"]
 [ext_resource type="Script" path="res://Scripts/sc_movement.gd" id="7_g0ns8"]
 
 [sub_resource type="Animation" id="Animation_p84m8"]
@@ -294,6 +295,8 @@ position = Vector2(44, -45)
 scale = Vector2(1.115, 2.39)
 disabled = true
 debug_color = Color(0.588235, 0, 0, 0.419608)
+
+[node name="GenericAttack" parent="Moves/Hitbox" instance=ExtResource("4_wv4ce")]
 
 [node name="Hurtbox" type="CollisionShape2D" parent="Moves"]
 position = Vector2(-10.5, -18)

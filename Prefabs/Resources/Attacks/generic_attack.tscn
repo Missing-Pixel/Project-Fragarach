@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://jy4p14nm5mbi"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/sc_hitbox_data.gd" id="1_7md1c"]
+
+[node name="GenericAttack" type="Node"]
+script = ExtResource("1_7md1c")
