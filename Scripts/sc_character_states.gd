@@ -15,10 +15,10 @@ func view_state():
 	return state_id
 
 # Link node variable to appropriate child node depending on example method string
-func _child_node_link(var_node, example_method):
+func _child_node_link(_var_node, example_method):
 	for child in get_children():
 		if child.has_method(example_method):
-			var_node = child
+			_var_node = child
 
 # Check if array has only zeroes
 func _check_all_zero(array):

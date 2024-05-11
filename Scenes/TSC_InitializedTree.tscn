@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=2 format=3 uid="uid://dfnjtj1tlyohh"]
 
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
-[ext_resource type="Script" path="res://Scripts/sc_input_manager.gd" id="3_jpkkb"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -9,10 +8,5 @@
 
 [node name="MainCamera" type="Camera2D" parent="TestingTree"]
 z_index = 5
-
-[node name="GlobalVariables" type="Node2D" parent="."]
-
-[node name="InputManager" type="Node2D" parent="GlobalVariables"]
-script = ExtResource("3_jpkkb")
 
 [node name="Player" parent="." instance=ExtResource("2_5qtk0")]

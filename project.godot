@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/TSC_InitializedTree.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Input_Manager="*res://Prefabs/Autoloaded/input_manager.tscn"
+
 [input]
 
 "Move Up"={
