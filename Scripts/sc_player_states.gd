@@ -5,15 +5,13 @@ extends CharacterStates
 signal showed_player_position(parent_pos)
 
 var node_card_manager: Node
-var node_action_manager: Node
-var node_move_manager: Node
-var node_health_manager: Node
 
 # Relay move player signal to movement script
 func _on_input_move(x, y):
-	input_velocity = [x, y]
-	if (current_state == States.IDLE or current_state == States.MOVING):
-		node_move_manager.update_velocity(x, y)
+	if (node_move_manager.get_is_knocked_back() == false):
+		input_velocity = [x, y]
+		if (current_state == States.IDLE or current_state == States.MOVING):
+			node_move_manager.update_velocity(x, y)
 
 # Relay select card signal to card management script
 func _on_input_select_card(card_slot):

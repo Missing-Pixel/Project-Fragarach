@@ -8,6 +8,10 @@ enum States {IDLE=0, MOVING=1, ATTACKING=2, KNOCKED_DOWN=3}
 var input_velocity: Array = [0, 0]
 var nodes_sprites: Array
 
+var node_action_manager: Node
+var node_move_manager: Node
+var node_health_manager: Node
+
 # Change state through a function rather than a public variable
 func change_state(new_state):
 	current_state = new_state
@@ -43,8 +47,17 @@ func _update_z_index():
 	for s in nodes_sprites:
 		s.z_index = self.global_position.y * 0.1
 
+# Base _ready method
+func _ready():
+	# Link node components
+	node_action_manager = _child_node_link("add_attack")
+	node_move_manager = _child_node_link("update_velocity")
+	node_health_manager = _child_node_link("get_damaged")
+	_list_sprite_nodes()
+	
+	current_state = States.IDLE
+
 # Base _process method
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# While moving: Emit signal of player position and update all sprite's z-index
 	if (current_state == States.MOVING):

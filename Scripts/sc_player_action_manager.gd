@@ -7,7 +7,8 @@ extends ObjectActionManager
 
 @export_group("Player Combos")
 @export var repeat_attack_bonus: float = 2
-@export var last_attack_bonus: float = 2
+@export var last_attack_kb_multiplier: float = 2
+@export var last_attack_match_bonus: float = 2
 @export var last_attack_ids: PackedInt32Array = []
 @export var knockdown_last_attack_ids: PackedInt32Array = []
 
@@ -18,6 +19,7 @@ var combo_counter: int = 0
 func _relay_info(target):
 	var vel_direction: Vector2
 	var final_damage: float = hitbox_manager.base_damage
+	var final_kb: float = hitbox_manager.base_kb_distance
 	var is_knockdown: bool = hitbox_manager.is_knockdown
 	
 	# Find direction to target from self
@@ -34,15 +36,16 @@ func _relay_info(target):
 	
 	# Apply final attack effects
 	if (attack_queue.size() == 1):
+		final_kb *= last_attack_kb_multiplier
 		if (last_attack_ids.has(hitbox_manager.attack_id)):
-			final_damage += last_attack_bonus
+			final_damage += last_attack_match_bonus
 		elif (knockdown_last_attack_ids.has(hitbox_manager.attack_id)):
 			is_knockdown = true
 	
 	# Relay info to target
 	target.health_manager.get_damaged(
 	final_damage, hitbox_manager.damage_type, 
-	hitbox_manager.base_kb_distance, vel_direction, is_knockdown)
+	final_kb, vel_direction, is_knockdown)
 
 # Remove latest attack and card. Play next attack
 # Change to idle and reset combo if no more attacks are in queue

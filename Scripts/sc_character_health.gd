@@ -14,11 +14,6 @@ enum DamageType { NONE=0, PUNCH=1, KICK=2 }
 @export var dmg_weak_type: DamageType = DamageType.NONE
 @export var dmg_weakness_multiplier: float = 2
 
-@export_group("Knockback")
-@export var kb_push_time: float = 0.02
-@export var knockdown_rise_time = 0.3
-@export var knockdown_airtime: float = 1
-
 @onready var curr_health: float = max_health
 @onready var curr_immunity: float = immunity_time
 
@@ -34,6 +29,7 @@ func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown
 		var final_kb_distance: float = kb_distance * kb_resist
 		
 		curr_immunity = immunity_time
+		
 		# Apply damage resist or weakness if possible, and then deal damage
 		if (dmg_type_received != DamageType.NONE):
 			if (dmg_resist_type == dmg_type_received):
@@ -42,9 +38,11 @@ func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown
 				final_damage *= dmg_weakness_multiplier
 		curr_health -= final_damage
 		
-		# Apply knockback
-		## movement: knockback user (final_kb_distance, is_knockdown)
-		## force is_knockdown to true when health < 0
+		# Apply knockback. Force knockdown if at or below 0 health
+		if (curr_health > 0):
+			get_parent().node_move_manager.start_knockback(kb_direction, final_kb_distance, is_knockdown)
+		else:
+			get_parent().node_move_manager.start_knockback(kb_direction, final_kb_distance, true)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

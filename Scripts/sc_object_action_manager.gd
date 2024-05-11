@@ -4,6 +4,7 @@ extends Node
 ## Need to manually connect the following signals:
 ## AnimationPlayer - animation_finished
 ## Hitbox - body_entered
+## KnockTimer - timeout
 
 @export var attack_range: Node
 @export_group("Animation Names")
@@ -31,6 +32,15 @@ func play_moving():
 # Plays an attacking animation
 func play_next_attack():
 	_play_animation(anim_attacks[0])
+
+# Plays a knockdown animation
+func play_knocked_down():
+	_play_animation(anim_knockdown)
+
+# Resumes any currently paused animations
+# Mainly for Knocked down animation when it gets paused in animation
+func resume_animation():
+	anim_player.play()
 
 # Add attack ID to queue. If applicable, change parent character state to ATTACKING and start anim
 func add_attack(attack_id):
@@ -71,7 +81,7 @@ func _cycle_attack():
 
 # Attack state: Cycle attacks
 # Knocked Down state: Check if character's health is 0. 
-# Engage death if true, change to idle if false
+# Engage death if true, change to idle and remove knockback state if false
 func _on_animation_player_animation_finished(anim_name):
 	if (get_parent().view_state() == 2):
 		_cycle_attack()
@@ -80,6 +90,7 @@ func _on_animation_player_animation_finished(anim_name):
 			pass # Replace with calling death function
 		else:
 			get_parent().change_state(0)
+			get_parent().node_move_manager.set_kb_false()
 			play_idle()
 
 # When hitbox connects, and target's base collision is in attack range,
