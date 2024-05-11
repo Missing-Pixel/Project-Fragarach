@@ -22,6 +22,10 @@ enum DamageType { NONE=0, PUNCH=1, KICK=2 }
 @onready var curr_health: float = max_health
 @onready var curr_immunity: float = immunity_time
 
+# Return current health
+func view_health():
+	return curr_health
+
 # When receiving a damage signal, manage the health and knockback
 func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown):
 	if (curr_immunity < 0):
