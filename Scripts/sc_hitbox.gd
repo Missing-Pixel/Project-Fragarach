@@ -1,7 +1,7 @@
 class_name Hitbox
 extends Node
 ## Detects hurtbox of a target and communicates with parent 
-## Has properties set in animator through a child Resource
+## Has properties set in animator through a child data nodes
 
 enum DamageType { NONE = 0, PUNCH = 1, KICK = 2 }
 
@@ -13,7 +13,7 @@ enum DamageType { NONE = 0, PUNCH = 1, KICK = 2 }
 
 var target: Node
 
-# Search Resources by its potential attack ID and add the correct one into the properties
+# Search data nodes by its potential attack ID and add the correct one into the properties
 func load_hitbox_data(n_atk_id: int):
 	for c in get_children():
 		if not(c is CollisionShape2D) and (c.attack_id == n_atk_id):

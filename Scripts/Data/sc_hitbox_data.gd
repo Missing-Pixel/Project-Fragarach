@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 
 enum DamageType { NONE = 0, PUNCH = 1, KICK = 2 }
 

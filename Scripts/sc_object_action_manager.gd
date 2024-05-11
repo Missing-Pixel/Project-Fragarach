@@ -46,6 +46,18 @@ func _play_animation(anim_file_name):
 	var anim_path = anim_library + "/" + anim_file_name
 	anim_player.play(anim_path)
 
+# Relaying damage and knockback values to target's health manager
+func _relay_info(target):
+	# Find direction to target from self
+	var vel_direction: Vector2
+	vel_direction = target.get_parent().global_position - get_parent().global_position
+	vel_direction = vel_direction.normalized()
+	
+	# Relay info to target
+	target.health_manager.get_damaged(
+	hitbox_manager.base_damage, hitbox_manager.damage_type, 
+	hitbox_manager.base_kb_distance, vel_direction, hitbox_manager.is_knockdown)
+
 # When animation finished, play next attack and remove 1 card
 # Change to idle if no more attacks are in queue
 func _on_animation_player_animation_finished(anim_name):
@@ -59,18 +71,11 @@ func _on_animation_player_animation_finished(anim_name):
 		play_idle()
 
 # When hitbox connects, and target's base collision is in attack range,
-# relay information to target's health manager
+# relay information to target
 func _on_hitbox_body_entered(body):
 	if (body != self):
 		if (attack_range.get_overlapping_bodies().has(body.get_parent())):
-			# Find direction to target from self
-			var vel_direction: Vector2
-			vel_direction = body.get_parent().global_position - get_parent().global_position
-			
-			# Relay info to target
-			body.health_manager.get_damaged(
-				hitbox_manager.base_damage, hitbox_manager.damage_type, 
-				hitbox_manager.base_kb_distance, vel_direction, hitbox_manager.is_knockdown)
+			_relay_info(body)
 
 
 # Called when the node enters the scene tree for the first time.

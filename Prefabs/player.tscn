@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://3le30i5udicx"]
+[gd_scene load_steps=19 format=3 uid="uid://3le30i5udicx"]
 
 [ext_resource type="Script" path="res://Scripts/sc_player_states.gd" id="1_gi0sr"]
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="2_hk7pl"]
+[ext_resource type="Script" path="res://Scripts/sc_player_action_manager.gd" id="2_ls36j"]
 [ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_vr3gl"]
-[ext_resource type="Script" path="res://Scripts/sc_object_action_manager.gd" id="2_y1uhq"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_7b03m"]
 [ext_resource type="Script" path="res://Scripts/sc_hitbox.gd" id="4_kp1b8"]
-[ext_resource type="PackedScene" uid="uid://jy4p14nm5mbi" path="res://Prefabs/Resources/Attacks/generic_attack.tscn" id="4_wv4ce"]
+[ext_resource type="PackedScene" uid="uid://cgamf07l4b1q" path="res://Prefabs/Data/Attacks/generic_attack.tscn" id="5_l0xqj"]
 [ext_resource type="Script" path="res://Scripts/sc_movement.gd" id="7_g0ns8"]
 
 [sub_resource type="Animation" id="Animation_p84m8"]
@@ -21,7 +21,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(-10.5, -18)]
+"values": [Vector2(0, -34.5)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -81,7 +81,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0.8, 0.9)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -262,15 +262,19 @@ size = Vector2(37, 69)
 radius = 4.0
 height = 26.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b67s3"]
+size = Vector2(53, 20)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 18
 collision_mask = 211
 script = ExtResource("1_gi0sr")
 
-[node name="Moves" type="CharacterBody2D" parent="."]
+[node name="Moves" type="CharacterBody2D" parent="." node_paths=PackedStringArray("attack_range")]
 collision_layer = 8
 collision_mask = 4
-script = ExtResource("2_y1uhq")
+script = ExtResource("2_ls36j")
+attack_range = NodePath("../AttackRange")
 anim_library = "Player"
 anim_idle = "player_idle"
 anim_move = "player_move"
@@ -298,16 +302,22 @@ scale = Vector2(1.115, 2.39)
 disabled = true
 debug_color = Color(0.588235, 0, 0, 0.419608)
 
-[node name="GenericAttack" parent="Moves/Hitbox" instance=ExtResource("4_wv4ce")]
+[node name="GenericAttack" parent="Moves/Hitbox" instance=ExtResource("5_l0xqj")]
 
 [node name="Hurtbox" type="CollisionShape2D" parent="Moves"]
-position = Vector2(-10.5, -18)
+position = Vector2(0, -34.5)
+scale = Vector2(0.8, 0.9)
 shape = SubResource("RectangleShape2D_jbblf")
 debug_color = Color(0, 0.588235, 0, 0.419608)
 
 [node name="BaseCollision" type="CollisionShape2D" parent="."]
 rotation = 4.71239
 shape = SubResource("CapsuleShape2D_58dvy")
+
+[node name="AttackRange" type="CollisionShape2D" parent="."]
+scale = Vector2(2.88, 1)
+shape = SubResource("RectangleShape2D_b67s3")
+debug_color = Color(0.92319, 5.09223e-05, 0.684713, 0.42)
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("7_g0ns8")

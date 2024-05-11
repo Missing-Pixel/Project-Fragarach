@@ -29,6 +29,7 @@ func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown
 		var dmg_type_received: DamageType = damage_type_id
 		var final_kb_distance: float = kb_distance * kb_resist
 		
+		curr_immunity = immunity_time
 		# Apply damage resist or weakness if possible, and then deal damage
 		if (dmg_type_received != DamageType.NONE):
 			if (dmg_resist_type == dmg_type_received):
