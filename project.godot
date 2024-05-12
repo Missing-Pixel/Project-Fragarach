@@ -19,6 +19,11 @@ config/icon="res://icon.svg"
 
 Input_Manager="*res://Prefabs/Autoloaded/input_manager.tscn"
 
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=360
+
 [input]
 
 "Move Up"={
