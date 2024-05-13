@@ -39,7 +39,7 @@ func select_card(card_slot_value):
 func start_combo():
 	if (card_state == CardState.QUEUE):
 		for k in card_queue:
-			get_parent().node_action_manager.add_attack(card_slots[k][0])
+			get_parent().node_action_manager.add_attack(card_slots[k][0]-1)
 		card_state = CardState.DISCARD
 
 # Remove latest card slot in queue and send it to discard pile.
@@ -47,10 +47,12 @@ func start_combo():
 func discard_front_card():
 	var k: int = card_queue[0]
 	discard_pile.append(card_slots[k][0])
+	card_slots[k][0] = 0
 	card_slots[k][1] = false
 	card_queue.remove_at(0)
 	if card_queue.is_empty():
 		card_state = CardState.DRAW
+		_draw_phase()
 
 # Empty entire card queue and put it into discard pile
 func empty_card_queue():
@@ -78,11 +80,12 @@ func _draw_phase():
 		deck_pile += discard_pile
 		discard_pile.clear()
 	
-	# Draw a card and put it into each card slot
+	# If card slot is empty, draw a card and put it into each card slot
 	for key in card_slots:
-		rand_index = randi() % deck_pile.size()
-		card_slots[key][0] = deck_pile[rand_index]
-		deck_pile.remove_at(rand_index)
+		if (card_slots[key][0] == 0):
+			rand_index = randi_range(0, deck_pile.size()-1)
+			card_slots[key][0] = deck_pile[rand_index]
+			deck_pile.remove_at(rand_index)
 	
 	card_state = CardState.QUEUE
 
