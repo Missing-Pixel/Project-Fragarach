@@ -97,7 +97,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	_move_character()
-	get_parent().move_and_slide()
+	get_parent().move_and_collide(final_vel * delta)
 	
 	if (autoflip_sprite):
 		_autoflip_sprite()
