@@ -338,7 +338,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.133333)
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("6_pqqdn")
-max_speed = 17.0
+max_speed = 36.0
 
 [node name="KnockdownTimer" type="Timer" parent="Movement"]
 

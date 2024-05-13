@@ -345,7 +345,7 @@ debug_color = Color(0.92319, 5.09223e-05, 0.684713, 0.42)
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("7_g0ns8")
-max_speed = 17.0
+max_speed = 45.0
 
 [node name="KnockdownTimer" type="Timer" parent="Movement"]
 

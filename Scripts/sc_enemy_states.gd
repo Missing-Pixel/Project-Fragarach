@@ -86,6 +86,9 @@ func _approach_player():
 # Add random attack to attack queue
 func _add_random_attack():
 	var r: int = randi_range(0, node_action_manager.get_attack_count()-1)
+	
+	input_velocity = [0, 0]
+	node_move_manager.update_velocity(0, 0)
 	node_action_manager.add_attack(r)
 
 # Charge up attack when player in range. Queue a random attack when charged. 
