@@ -47,7 +47,8 @@ func reset_kb():
 
 # Start knockback timer, setting up the booleans, speed and direction
 func start_knockback(kb_direction, kb_distance, is_knockdown = false):
-	direction = kb_direction
+	direction[0] = kb_direction.x
+	direction[1] = kb_direction.y 
 
 	is_knocked_back = true
 	if (is_knockdown == true):

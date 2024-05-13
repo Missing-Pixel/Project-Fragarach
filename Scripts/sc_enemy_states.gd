@@ -70,7 +70,7 @@ func _update_delayed_pos():
 	
 	search_timer.wait_time = player_search_period
 	search_timer.start()
-	await search_timer.timeout()
+	await search_timer.timeout
 	is_search_ready = true
 
 # Approach player's point

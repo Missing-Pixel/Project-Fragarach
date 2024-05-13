@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=3 format=3 uid="uid://dfnjtj1tlyohh"]
 
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
+[ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/enemy_generic.tscn" id="2_up4gd"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -12,4 +13,6 @@ zoom = Vector2(2, 2)
 
 [node name="Player" parent="." instance=ExtResource("2_5qtk0")]
 texture_filter = 1
-current_state = 0
+
+[node name="Enemy" parent="." instance=ExtResource("2_up4gd")]
+position = Vector2(407, -18)

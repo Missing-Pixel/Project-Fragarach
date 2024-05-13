@@ -19,8 +19,8 @@ extends Node
 
 var anim_player: Node
 var hitbox_manager: Node
-var health_manager: Node
 var attack_queue: Array = []
+var health_manager: Node
 
 # Return count of number of attacks
 func get_attack_count():
@@ -80,7 +80,6 @@ func _relay_info(target):
 # Remove latest attack and card. Play next attack, otherwise change to idle if no more
 func _cycle_attack():
 	attack_queue.remove_at(0)
-	get_parent().node_card_manager.discard_front_card()
 	
 	if (attack_queue.size() > 0):
 		play_next_attack()
@@ -122,9 +121,10 @@ func _on_hitbox_body_entered(body):
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
-	health_manager = get_parent().node_health_manager
 	for c in get_children():
 		if (c is AnimationPlayer):
 			anim_player = c
 		elif (c is Area2D):
 			hitbox_manager = c
+	await get_tree().create_timer(0.1).timeout
+	health_manager = get_parent().node_health_manager
