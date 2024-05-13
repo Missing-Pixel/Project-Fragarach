@@ -267,8 +267,8 @@ size = Vector2(53, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um4cg"]
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("search_timer")]
-collision_layer = 18
-collision_mask = 227
+collision_layer = 34
+collision_mask = 211
 script = ExtResource("1_biqsa")
 search_timer = NodePath("SearchTimer")
 
@@ -316,8 +316,8 @@ rotation = 4.71239
 shape = SubResource("CapsuleShape2D_58dvy")
 
 [node name="AttackRange" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 32
+collision_layer = 32
+collision_mask = 16
 
 [node name="RangeBox" type="CollisionShape2D" parent="AttackRange"]
 scale = Vector2(2.88, 1)
