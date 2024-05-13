@@ -59,7 +59,7 @@ func _ready():
 
 # Base _process method
 func _process(_delta):
-	# While moving: Emit signal of player position and update all sprite's z-index
+	# While moving: Update all sprite's z-index
 	if (current_state == States.MOVING):
 		_update_z_index()
 	

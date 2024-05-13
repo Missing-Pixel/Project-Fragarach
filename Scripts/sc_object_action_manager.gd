@@ -22,6 +22,10 @@ var hitbox_manager: Node
 var health_manager: Node
 var attack_queue: Array = []
 
+# Return count of number of attacks
+func get_attack_count():
+	return anim_attacks.size()
+
 # Plays idle animation
 func play_idle():
 	_play_animation(anim_idle)

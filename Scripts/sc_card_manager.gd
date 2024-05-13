@@ -39,7 +39,7 @@ func select_card(card_slot_value):
 func start_combo():
 	if (card_state == CardState.QUEUE):
 		for k in card_queue:
-			get_parent().node_attack_manager.add_attack(card_slots[k][0])
+			get_parent().node_action_manager.add_attack(card_slots[k][0])
 		card_state = CardState.DISCARD
 
 # Remove latest card slot in queue and send it to discard pile.
