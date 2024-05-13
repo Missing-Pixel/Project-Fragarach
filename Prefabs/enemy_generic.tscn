@@ -266,18 +266,19 @@ size = Vector2(53, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_um4cg"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("search_timer")]
 collision_layer = 18
 collision_mask = 227
 script = ExtResource("1_biqsa")
+search_timer = NodePath("SearchTimer")
 
 [node name="Moves" type="CharacterBody2D" parent="."]
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_q3nau")
-anim_library = "Player"
-anim_idle = "player_idle"
-anim_move = "player_move"
+anim_library = "Enemy"
+anim_idle = "enemy_idle"
+anim_move = "enemy_move"
 
 [node name="CharacterSprite" type="Sprite2D" parent="Moves"]
 texture = ExtResource("3_6acc4")
@@ -328,7 +329,9 @@ collision_layer = 0
 collision_mask = 16
 
 [node name="SearchBox" type="CollisionShape2D" parent="SearchRange"]
+scale = Vector2(37, 37)
 shape = SubResource("RectangleShape2D_um4cg")
+debug_color = Color(0, 0.6, 0.701961, 0.133333)
 
 [node name="Movement" type="Node" parent="."]
 script = ExtResource("6_pqqdn")
@@ -343,6 +346,8 @@ script = ExtResource("7_3jc63")
 
 [connection signal="animation_finished" from="Moves/AnimationPlayer" to="Moves" method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Moves/Hitbox" to="Moves" method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_attack_range_body_entered"]
+[connection signal="body_exited" from="AttackRange" to="." method="_on_attack_range_body_exited"]
 [connection signal="body_entered" from="SearchRange" to="." method="_on_search_range_body_entered"]
 [connection signal="body_exited" from="SearchRange" to="." method="_on_search_range_body_exited"]
 [connection signal="timeout" from="Movement/KnockdownTimer" to="Movement" method="_on_timer_timeout"]

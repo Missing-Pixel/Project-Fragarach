@@ -4,21 +4,22 @@ extends CharacterStates
 ## Needed signals:
 ## Player - showed_player_position
 ## SearchRange - body_entered, body_exited
+## AttackRange - body_entered, body_exited
 ## SearchTimer - timeout
 
 @export_group("Movement Detection")
 @export var player_search_period: float = 0.6
 @export var deadzone_range: float = 1 
+@export var search_timer: Node
 @export_group("Attack Conditions")
-@export var detection_range: float = 10
 @export var attack_cooldown: float = 0.5
 @export var lag_cooldown_multiplier: float = 2
 
-var search_timer: Node
 var player_node: Node
 var player_position: Array = [0, 0]
 var is_in_deadzone: bool = false
 var is_search_ready: bool = true
+var is_player_in_range: bool = false
 @onready var delayed_player_pos: Array = player_position
 @onready var attack_timer: float = attack_cooldown
 
@@ -33,6 +34,15 @@ func _on_search_range_body_exited(body):
 	if (body.showed_player_position.is_connected(_on_player_position_shown) == true):
 		body.showed_player_position.disconnect(_on_player_position_shown)
 		player_node = null
+
+# Set is_player_in_range to true
+func _on_attack_range_body_entered(body):
+	is_player_in_range = true
+
+# Reset attack_timer and set is_player_in_range to false
+func _on_attack_range_body_exited(body):
+	attack_timer = attack_cooldown
+	is_player_in_range = false
 
 # Update player position
 func _on_player_position_shown(pos):
@@ -79,17 +89,11 @@ func _add_random_attack():
 	node_action_manager.add_attack(r)
 
 # Charge up attack when player in range. Queue a random attack when charged. 
-# Reset charge if player leaves range
 func _charge_attack(delta):
-	var distance: float = _distance_between_pos_2D(player_position, self.global_position)
-	
-	if (distance <= detection_range):
-		attack_timer -= delta
-		if (attack_timer <= 0):
-			attack_timer = attack_cooldown
-			_add_random_attack()
-	elif (distance > detection_range and attack_timer < attack_cooldown):
+	attack_timer -= delta
+	if (attack_timer <= 0):
 		attack_timer = attack_cooldown
+		_add_random_attack()
 
 func _process(delta):
 	# While moving: Update all sprite's z-index
@@ -113,8 +117,9 @@ func _process(delta):
 		
 		if (_distance_between_pos_2D(delayed_player_pos, self.global_position) < deadzone_range):
 			is_in_deadzone = true
+			input_velocity = [0, 0]
 		else:
 			is_in_deadzone = false
-			input_velocity = [0, 0]
 		
-		_charge_attack(delta)
+		if (is_player_in_range == true):
+			_charge_attack(delta)
