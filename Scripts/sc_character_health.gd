@@ -5,7 +5,7 @@ extends Node
 enum DamageType { NONE=0, PUNCH=1, KICK=2 }
 
 @export var max_health: float = 100
-@export var immunity_time: float = 0.6
+@export var immunity_time: float = 0.6 # Should be longer than hitstun animation
 @export var kb_resist: float = 0.5
 @export var kb_death_multiplier: float = 2
 @export_group("Damage Types")
@@ -21,14 +21,18 @@ enum DamageType { NONE=0, PUNCH=1, KICK=2 }
 func view_health():
 	return curr_health
 
+# Reset immunity timer
+func reset_immunity():
+	curr_immunity = immunity_time
+
 # When receiving a damage signal, manage the health and knockback
 func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown):
-	if (curr_immunity < 0):
+	if (curr_immunity <= 0):
 		var final_damage: float = damage
 		var dmg_type_received: DamageType = damage_type_id
 		var final_kb_distance: float = kb_distance * kb_resist
 		
-		curr_immunity = immunity_time
+		reset_immunity()
 		
 		# Apply damage resist or weakness if possible, and then deal damage
 		if (dmg_type_received != DamageType.NONE):
@@ -44,13 +48,8 @@ func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown
 		else:
 			get_parent().node_move_manager.start_knockback(kb_direction, final_kb_distance, true)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (curr_immunity >= 0):
+	if (curr_immunity > 0):
 		curr_immunity -= delta
 	pass

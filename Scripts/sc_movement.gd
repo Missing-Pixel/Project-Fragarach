@@ -7,10 +7,11 @@ extends Node
 @export_range(0, 1) var y_speed_reduce_multiplier: float = 0.7
 
 @export_group("Knockback")
-@export var knockback_time: float = 0.02
-@export var knockback_speed: float = 1
-@export var knockdown_airtime: float = 0.6
-@export var knockdown_speed: float = 3
+@export var knockback_time: float = 0.1 # Should be about the same time as hitstun animation
+@export var knockback_max_speed: float = 1
+@export var knockdown_airtime: float = 0.9 # Should be longer than knockdown anim's pause point
+@export var knockdown_max_speed: float = 3
+@export var knockdown_distance_multiplier: float = 3
 
 var final_vel: Vector2
 var direction: Array = [0, 0]
@@ -20,7 +21,7 @@ var anim_manager: Node
 var kb_timer: Node
 @onready var curr_speed: float = max_speed
 
-# Update direction based on input
+# Update direction based on input when knockback is not happening
 func update_velocity(vel_x, vel_y, speed = max_speed):
 	if (is_knocked_back == false):
 		direction[0] = vel_x
@@ -49,17 +50,26 @@ func start_knockback(kb_direction, kb_distance, is_knockdown = false):
 
 	is_knocked_back = true
 	if (is_knockdown == true):
-		curr_speed = kb_distance/knockdown_airtime
+		var kd_distance: float = kb_distance * knockdown_distance_multiplier
+		
+		curr_speed = _set_knockback_speed(kd_distance, knockdown_airtime, knockdown_max_speed)
 		is_knocked_down = is_knockdown
 		get_parent().change_state(3)
 		get_parent().node_action_manager.play_knocked_down()
 		kb_timer.wait_time = knockdown_airtime
 	else:
-		curr_speed = kb_distance/knockback_time
+		curr_speed = _set_knockback_speed(kb_distance, knockback_time, knockback_max_speed)
 		kb_timer.wait_time = knockback_time
 	
 	kb_timer.start
 
+# Return speed equal to distance/time. Reduce if it exceeds limit
+func _set_knockback_speed(distance, time, limit):
+	var speed: float = distance/time
+	
+	if (speed > limit):
+		speed = limit
+	return speed
 
 # Flip sprite based on vel_x value's sign
 func _autoflip_sprite():

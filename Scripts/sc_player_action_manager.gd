@@ -60,3 +60,10 @@ func _cycle_attack():
 		combo_counter = 0
 		get_parent().change_state(0)
 		play_idle()
+
+# Empty attack queue and cards, and switch to idle state
+func _reset_attacks():
+	attack_queue.clear()
+	get_parent().node_card_manager.empty_card_queue()
+	get_parent().change_state(0)
+	play_idle()

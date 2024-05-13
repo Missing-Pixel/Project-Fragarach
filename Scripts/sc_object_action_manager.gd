@@ -12,6 +12,7 @@ extends Node
 @export var anim_idle: String
 @export var anim_move: String
 @export var anim_knockdown: String
+@export var anim_hitstun: String
 # index = ID of attack (int)
 # value = attack animation name (string) 
 @export var anim_attacks: PackedStringArray
@@ -36,6 +37,10 @@ func play_next_attack():
 # Plays a knockdown animation
 func play_knocked_down():
 	_play_animation(anim_knockdown)
+
+# Plays a hitstun animation
+func play_hitstun():
+	_play_animation(anim_hitstun)
 
 # Resumes any currently paused animations
 # Mainly for Knocked down animation when it gets paused in animation
@@ -79,9 +84,14 @@ func _cycle_attack():
 		get_parent().change_state(0)
 		play_idle()
 
-# Attack state: Cycle attacks
-# Knocked Down state: Check if character's health is 0. 
-# Engage death if true, change to idle and remove knockback state if false
+# Empty attack queue and switch to idle state
+func _reset_attacks():
+	attack_queue.clear()
+	get_parent().change_state(0)
+	play_idle()
+
+# Knocked Back: In attack state, cycle attacks. In other states, return to idle
+# Knocked Down: If health is 0, engage death. Otherwise, reset immunity and attacks
 func _on_animation_player_animation_finished(anim_name):
 	if (get_parent().view_state() == 2):
 		_cycle_attack()
@@ -89,9 +99,12 @@ func _on_animation_player_animation_finished(anim_name):
 		if (health_manager.view_health() <= 0):
 			pass # Replace with calling death function
 		else:
-			get_parent().change_state(0)
+			get_parent().node_health_manager.reset_immunity()
 			get_parent().node_move_manager.set_kb_false()
-			play_idle()
+			_reset_attacks()
+	else:
+		get_parent().change_state(0)
+		play_idle()
 
 # When hitbox connects, and target's base collision is in attack range,
 # relay information to target

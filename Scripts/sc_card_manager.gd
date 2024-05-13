@@ -90,13 +90,3 @@ func _draw_phase():
 func _ready():
 	_create_deck()
 	_draw_phase()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	# In Discard state, if card queue empty change to Draw
-	pass
-	
-	## ATK signal: In Discard state if attack queue is smaller than card queue:
-			# move card from card queue to discard pile
-	## KD signal: In player's KD state, empty card queue onto discard pile
