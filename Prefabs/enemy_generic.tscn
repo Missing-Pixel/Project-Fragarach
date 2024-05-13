@@ -276,9 +276,11 @@ search_timer = NodePath("SearchTimer")
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_q3nau")
-anim_library = "Enemy"
-anim_idle = "enemy_idle"
-anim_move = "enemy_move"
+anim_library = "Player"
+anim_idle = "player_idle"
+anim_move = "player_move"
+anim_hitstun = "player_stun"
+anim_attacks = PackedStringArray("player_hpunch")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Moves"]
 texture = ExtResource("3_6acc4")
