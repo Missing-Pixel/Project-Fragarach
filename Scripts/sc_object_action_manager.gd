@@ -90,21 +90,23 @@ func _reset_attacks():
 	get_parent().change_state(0)
 	play_idle()
 
-# Knocked Back: In attack state, cycle attacks. In other states, return to idle
-# Knocked Down: If health is 0, engage death. Otherwise, reset immunity and attacks
+# Attacking: Cycle attack
+# if Knocked Back: Reset kb and immunity. If not knocked down or attacking, reset to idle
+#    if Knocked Down: If health is 0, engage death. Otherwise, reset immunity and attacks
 func _on_animation_player_animation_finished(anim_name):
 	if (get_parent().view_state() == 2):
 		_cycle_attack()
-	elif (get_parent().view_state() == 3):
-		if (health_manager.view_health() <= 0):
-			pass # Replace with calling death function
-		else:
-			get_parent().node_health_manager.reset_immunity()
-			get_parent().node_move_manager.set_kb_false()
-			_reset_attacks()
-	else:
-		get_parent().change_state(0)
-		play_idle()
+	if (get_parent().node_move_manager.get_is_knocked_back() == true):
+		get_parent().node_move_manager.reset_kb()
+		get_parent().node_health_manager.reset_immunity()
+		if (get_parent().view_state() == 3):
+			if (health_manager.view_health() <= 0):
+				pass ## Replace with calling death function
+			else:
+				_reset_attacks()
+		elif (get_parent().view_state() != 2):
+			get_parent().change_state(0)
+			play_idle()
 
 # When hitbox connects, and target's base collision is in attack range,
 # relay information to target

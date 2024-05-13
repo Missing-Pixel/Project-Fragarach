@@ -26,13 +26,12 @@ func reset_immunity():
 	curr_immunity = immunity_time
 
 # When receiving a damage signal, manage the health and knockback
+# Only when not immune and not being knocked back
 func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown):
-	if (curr_immunity <= 0):
+	if (curr_immunity <= 0 and get_parent().node_move_manager.get_is_knocked_back() == false):
 		var final_damage: float = damage
 		var dmg_type_received: DamageType = damage_type_id
 		var final_kb_distance: float = kb_distance * kb_resist
-		
-		reset_immunity()
 		
 		# Apply damage resist or weakness if possible, and then deal damage
 		if (dmg_type_received != DamageType.NONE):
@@ -52,4 +51,3 @@ func get_damaged(damage, damage_type_id, kb_distance, kb_direction, is_knockdown
 func _process(delta):
 	if (curr_immunity > 0):
 		curr_immunity -= delta
-	pass

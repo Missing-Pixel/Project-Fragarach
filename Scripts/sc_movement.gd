@@ -7,7 +7,7 @@ extends Node
 @export_range(0, 1) var y_speed_reduce_multiplier: float = 0.7
 
 @export_group("Knockback")
-@export var knockback_time: float = 0.1 # Should be about the same time as hitstun animation
+@export var knockback_time: float = 0.1 # Should be as long as hitstun animation
 @export var knockback_max_speed: float = 1
 @export var knockdown_airtime: float = 0.9 # Should be longer than knockdown anim's pause point
 @export var knockdown_max_speed: float = 3
@@ -18,7 +18,7 @@ var direction: Array = [0, 0]
 var is_knocked_back: bool = false
 var is_knocked_down: bool = false
 var anim_manager: Node
-var kb_timer: Node
+var knockdown_timer: Node
 @onready var curr_speed: float = max_speed
 
 # Update direction based on input when knockback is not happening
@@ -40,8 +40,9 @@ func get_is_knocked_back():
 func get_knockdown_airtime():
 	return knockdown_airtime
 
-# Sets knockback boolean to false
-func set_kb_false():
+# Sets knockback boolean to false and reset direction
+func reset_kb():
+	direction = [0, 0]
 	is_knocked_back = false
 
 # Start knockback timer, setting up the booleans, speed and direction
@@ -56,12 +57,12 @@ func start_knockback(kb_direction, kb_distance, is_knockdown = false):
 		is_knocked_down = is_knockdown
 		get_parent().change_state(3)
 		get_parent().node_action_manager.play_knocked_down()
-		kb_timer.wait_time = knockdown_airtime
+		knockdown_timer.wait_time = knockdown_airtime
 	else:
 		curr_speed = _set_knockback_speed(kb_distance, knockback_time, knockback_max_speed)
-		kb_timer.wait_time = knockback_time
+		get_parent().node_action_manager.play_hitstun()
 	
-	kb_timer.start
+	knockdown_timer.start
 
 # Return speed equal to distance/time. Reduce if it exceeds limit
 func _set_knockback_speed(distance, time, limit):
@@ -89,7 +90,7 @@ func _ready():
 	anim_manager = get_parent().node_action_manager
 	for c in get_children():
 		if (c is Timer):
-			kb_timer = c
+			knockdown_timer = c
 			break
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -100,12 +101,8 @@ func _physics_process(delta):
 	if (autoflip_sprite):
 		_autoflip_sprite()
 
-# Disable knockback if knockback was the only condition. Disables knockdown otherwise
-# When knockdown disabled, knockback is disabled later when KNOCKED_DOWN state ends
+# Disable knockback, resets velocity and resumes KD animation
 func _on_timer_timeout():
 	direction = [0, 0]
-	if (is_knocked_down == true):
-		is_knocked_down = false
-		get_parent().node_action_manager.resume_animation()
-	else:
-		is_knocked_back = false
+	is_knocked_down = false
+	get_parent().node_action_manager.resume_animation()
