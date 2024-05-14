@@ -21,8 +21,9 @@ Input_Manager="*res://Prefabs/Autoloaded/input_manager.tscn"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 
 [input]
 

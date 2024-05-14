@@ -38,60 +38,60 @@ theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Attacks:"
 
 [node name="Slot1" type="Label" parent="LevelHUDPrototype"]
-offset_left = 2.0
-offset_top = 289.0
-offset_right = 62.0
-offset_bottom = 355.0
+offset_left = 3.0
+offset_top = 650.0
+offset_right = 63.0
+offset_bottom = 716.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Slot 1 - I
 Card: 
 Selected"
 
 [node name="Slot2" type="Label" parent="LevelHUDPrototype"]
-offset_left = 68.0
-offset_top = 288.0
-offset_right = 128.0
-offset_bottom = 354.0
+offset_left = 69.0
+offset_top = 649.0
+offset_right = 129.0
+offset_bottom = 715.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Slot 2 - J
 Card: 
 Selected"
 
 [node name="Slot3" type="Label" parent="LevelHUDPrototype"]
-offset_left = 138.0
-offset_top = 288.0
-offset_right = 200.0
-offset_bottom = 354.0
+offset_left = 139.0
+offset_top = 649.0
+offset_right = 201.0
+offset_bottom = 715.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Slot 3 - K
 Card: 
 Selected"
 
 [node name="Slot4" type="Label" parent="LevelHUDPrototype"]
-offset_left = 208.0
-offset_top = 289.0
-offset_right = 268.0
-offset_bottom = 355.0
+offset_left = 209.0
+offset_top = 650.0
+offset_right = 269.0
+offset_bottom = 716.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Slot 4 - L
 Card: 
 Selected"
 
 [node name="ReadyCombo" type="Label" parent="LevelHUDPrototype"]
-offset_left = 277.0
-offset_top = 291.0
-offset_right = 368.0
-offset_bottom = 357.0
+offset_left = 278.0
+offset_top = 652.0
+offset_right = 369.0
+offset_bottom = 718.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "<Space>
 Start Combo:
 Card Queue"
 
 [node name="DeckPiles" type="Label" parent="LevelHUDPrototype"]
-offset_left = 552.0
-offset_top = 310.0
-offset_right = 634.0
-offset_bottom = 353.0
+offset_left = 1194.0
+offset_top = 673.0
+offset_right = 1276.0
+offset_bottom = 716.0
 theme_override_fonts/font = ExtResource("3_ugv34")
 text = "Deck: ##
 (Discard: ##)"
