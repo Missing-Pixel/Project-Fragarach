@@ -4,7 +4,7 @@ extends Node
 
 @export var autoflip_sprite: bool = true
 @export var max_speed : float = 7
-@export_range(0, 1) var y_speed_reduce_multiplier: float = 0.7
+@export_range(0, 1) var y_speed_reduce_multiplier: float = 0.55
 
 @export_group("Knockback")
 @export var knockback_time: float = 0.1 # Should be as long as hitstun animation

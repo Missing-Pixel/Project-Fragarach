@@ -19,7 +19,7 @@ func update_attack_queue():
 		$AttackQueue.hide()
 
 func update_card_slots():
-	var slots: Array = ["I", "J", "K", "L"]
+	var slots: Array = ["U", "I", "O", "P"]
 	var slot_text: Array = [$Slot1, $Slot2, $Slot3, $Slot4]
 	var slot_dict = player_node.node_card_manager.card_slots
 	var output_text: String = ""
