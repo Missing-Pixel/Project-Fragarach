@@ -16,7 +16,7 @@ enum CardState { DRAW, QUEUE, DISCARD }
 enum CardAttacks { PUNCH=1, KICK=2, HEAVY_PUNCH=3, HEAVY_KICK=4}
 var card_state: CardState = CardState.DRAW
 var deck_pile: Array = []
-var card_slots = {
+var card_slots = { # slot: [attack_id, is_Selected]
 	1: [0, false], 
 	2: [0, false], 
 	3: [0, false], 

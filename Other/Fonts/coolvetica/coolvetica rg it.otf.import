@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://rfspb2dcmocw"
+path="res://.godot/imported/coolvetica rg it.otf-1b83e63bbfa00dd0d7f69efc0552c467.fontdata"
+
+[deps]
+
+source_file="res://Other/Fonts/coolvetica/coolvetica rg it.otf"
+dest_files=["res://.godot/imported/coolvetica rg it.otf-1b83e63bbfa00dd0d7f69efc0552c467.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
