@@ -316,6 +316,7 @@ anim_hitstun = "player_stun"
 anim_attacks = PackedStringArray("player_hpunch", "player_hpunch", "player_hpunch", "player_hpunch")
 
 [node name="CharacterSprite" type="Sprite2D" parent="Moves"]
+texture_filter = 1
 texture = ExtResource("2_hk7pl")
 offset = Vector2(0, -62)
 hframes = 8
