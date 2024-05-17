@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxpinssiic54x"]
+
+[ext_resource type="Script" path="res://Scripts/MenusAndUI/sc_proto_base.gd" id="1_4gcob"]
+[ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="2_gw3ko"]
+
+[node name="LevelHUDPrototype" type="CanvasLayer" node_paths=PackedStringArray("player_node")]
+script = ExtResource("1_4gcob")
+player_node = NodePath("")
+
+[node name="Health" type="Label" parent="."]
+offset_right = 75.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Player 
+Health: ###"
+
+[node name="AttackQueue" type="Label" parent="."]
+offset_top = 43.0
+offset_right = 58.0
+offset_bottom = 66.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Attacks:"
+
+[node name="Slot1" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 650.0
+offset_right = 63.0
+offset_bottom = 716.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Slot 1 - I
+Card: 
+Selected"
+
+[node name="Slot2" type="Label" parent="."]
+offset_left = 69.0
+offset_top = 649.0
+offset_right = 129.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Slot 2 - J
+Card: 
+Selected"
+
+[node name="Slot3" type="Label" parent="."]
+offset_left = 139.0
+offset_top = 649.0
+offset_right = 201.0
+offset_bottom = 715.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Slot 3 - K
+Card: 
+Selected"
+
+[node name="Slot4" type="Label" parent="."]
+offset_left = 209.0
+offset_top = 650.0
+offset_right = 269.0
+offset_bottom = 716.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Slot 4 - L
+Card: 
+Selected"
+
+[node name="ReadyCombo" type="Label" parent="."]
+offset_left = 278.0
+offset_top = 652.0
+offset_right = 369.0
+offset_bottom = 718.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "<Space>
+Start Combo:
+Card Queue"
+
+[node name="DeckPiles" type="Label" parent="."]
+offset_left = 1194.0
+offset_top = 673.0
+offset_right = 1276.0
+offset_bottom = 716.0
+theme_override_fonts/font = ExtResource("2_gw3ko")
+text = "Deck: ##
+(Discard: ##)"

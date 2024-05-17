@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0j427gdhxhk6"]
+
+[ext_resource type="Texture2D" uid="uid://dblihxpc0no5o" path="res://Sprites/Level/BG/Background_Art.png" id="1_i35ga"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x287v"]
+texture = ExtResource("1_i35ga")
+texture_region_size = Vector2i(320, 180)
+0:0/0 = 0
+0:0/0/z_index = -999
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-160, -90, 160, -90, 160, 30.2598, -160, 30.1875)
+0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-160, 90, 160, 90, 160, 68.9375, -160, 69.1512)
+
+[sub_resource type="TileSet" id="TileSet_bdart"]
+tile_size = Vector2i(320, 180)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 3
+sources/0 = SubResource("TileSetAtlasSource_x287v")
+
+[node name="BackGroundSprite" type="TileMap"]
+position = Vector2(-160, 40)
+tile_set = SubResource("TileSet_bdart")
+format = 2
+layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -1, 0, 0, -2, 0, 0)

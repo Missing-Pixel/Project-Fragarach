@@ -1,37 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=5 format=3 uid="uid://dfnjtj1tlyohh"]
 
-[ext_resource type="Texture2D" uid="uid://dblihxpc0no5o" path="res://Sprites/Level/BG/Background_Art.png" id="1_ri5m7"]
+[ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_ayml0"]
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
 [ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/enemy_generic.tscn" id="2_up4gd"]
-[ext_resource type="Script" path="res://Scripts/MenusAndUI/sc_proto_base.gd" id="3_cx52w"]
-[ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="3_ugv34"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x287v"]
-texture = ExtResource("1_ri5m7")
-texture_region_size = Vector2i(320, 180)
-0:0/0 = 0
-0:0/0/z_index = -999
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-160, -90, 160, -90, 160, 30.2598, -160, 30.1875)
-0:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(-160, 90, 160, 90, 160, 68.9375, -160, 69.1512)
-
-[sub_resource type="TileSet" id="TileSet_bdart"]
-tile_size = Vector2i(320, 180)
-physics_layer_0/collision_layer = 1
-physics_layer_0/collision_mask = 3
-sources/0 = SubResource("TileSetAtlasSource_x287v")
+[ext_resource type="PackedScene" uid="uid://cxpinssiic54x" path="res://Prefabs/level_hud_prototype.tscn" id="4_sx2jr"]
 
 [node name="InitializedTree" type="Node2D"]
 
-[node name="BackGroundSprite" type="TileMap" parent="."]
-position = Vector2(-160, 40)
-tile_set = SubResource("TileSet_bdart")
-format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65530, 0, 0, -65529, 0, 0, -1, 0, 0, -2, 0, 0)
-
-[node name="TestingTree" type="Node2D" parent="."]
-visible = false
+[node name="BackGroundSprite" parent="." instance=ExtResource("1_ayml0")]
 
 [node name="Player" parent="." instance=ExtResource("2_5qtk0")]
 texture_filter = 1
@@ -39,79 +15,4 @@ texture_filter = 1
 [node name="Enemy" parent="." instance=ExtResource("2_up4gd")]
 position = Vector2(407, 2)
 
-[node name="LevelHUDPrototype" type="CanvasLayer" parent="." node_paths=PackedStringArray("player_node")]
-script = ExtResource("3_cx52w")
-player_node = NodePath("../Player")
-
-[node name="Health" type="Label" parent="LevelHUDPrototype"]
-offset_right = 75.0
-offset_bottom = 43.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Player 
-Health: ###"
-
-[node name="AttackQueue" type="Label" parent="LevelHUDPrototype"]
-offset_top = 43.0
-offset_right = 58.0
-offset_bottom = 66.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Attacks:"
-
-[node name="Slot1" type="Label" parent="LevelHUDPrototype"]
-offset_left = 3.0
-offset_top = 650.0
-offset_right = 63.0
-offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Slot 1 - I
-Card: 
-Selected"
-
-[node name="Slot2" type="Label" parent="LevelHUDPrototype"]
-offset_left = 69.0
-offset_top = 649.0
-offset_right = 129.0
-offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Slot 2 - J
-Card: 
-Selected"
-
-[node name="Slot3" type="Label" parent="LevelHUDPrototype"]
-offset_left = 139.0
-offset_top = 649.0
-offset_right = 201.0
-offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Slot 3 - K
-Card: 
-Selected"
-
-[node name="Slot4" type="Label" parent="LevelHUDPrototype"]
-offset_left = 209.0
-offset_top = 650.0
-offset_right = 269.0
-offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Slot 4 - L
-Card: 
-Selected"
-
-[node name="ReadyCombo" type="Label" parent="LevelHUDPrototype"]
-offset_left = 278.0
-offset_top = 652.0
-offset_right = 369.0
-offset_bottom = 718.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "<Space>
-Start Combo:
-Card Queue"
-
-[node name="DeckPiles" type="Label" parent="LevelHUDPrototype"]
-offset_left = 1194.0
-offset_top = 673.0
-offset_right = 1276.0
-offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_ugv34")
-text = "Deck: ##
-(Discard: ##)"
+[node name="LevelHUDPrototype" parent="." instance=ExtResource("4_sx2jr")]
