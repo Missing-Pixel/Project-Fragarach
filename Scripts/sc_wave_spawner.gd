@@ -18,6 +18,13 @@ var enemy_prefabs: Array
 var is_active: bool = false
 var spawn_timer: float = 0
 
+# Returns total enemy count
+func get_enemy_count():
+	var total: int = 0
+	for i in enemy_counts:
+		total += i
+	return total
+
 # Disable collision, set is_active to true and emit signal that spawner started
 func _on_body_entered(body):
 	get_child(0).disabled = true

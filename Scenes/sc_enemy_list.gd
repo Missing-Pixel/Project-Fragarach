@@ -18,8 +18,14 @@ var loaded_enemies: Array = []
 # Add enemy to loaded_enemies and connect its values
 func _on_enemy_spawned(enemy):
 	loaded_enemies.append(enemy)
-	# Connect on_character_died, on_player_found, on_player_left
+	enemy.character_died.connect(_on_character_died)
+	enemy.player_found.connect(_on_player_found)
+	enemy.player_left.connect(_on_player_left)
 	enemy.set_speedlag_tag(false, attack_rate_reduce_multiplier, move_speed_reduce_multiplier)
+
+# Lock camera at Wave Spawner's center point
+func _on_spawner_started(spawner_pos_x):
+	enemy_flag_triggered.emit(spawner_pos_x, spawner_pos_x, true)
 
 # Set enemy speed based on whether enemy is tagged or not
 func _on_player_found(enemy):
@@ -32,7 +38,6 @@ func _on_player_found(enemy):
 # Reset speedlag tag if player left search radius
 func _on_player_left(enemy):
 	if (tagged_enemy == enemy):
-		pass
 		_reset_speedlag_tag()
 
 # Increae death count, remove enemy form loaded_enemies and destroy enemy
@@ -97,13 +102,14 @@ func _reset_speedlag_tag():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Add spawned enemies and wave spawners to enemy_max
+	# Enemies: +1 enemy_max, add child to loaded_enemies and connect signals
+	# Wave spawners: enemy_max += enemy count, and connect signals
 	for child in get_children():
-		if child is CharacterBody2D: # +1 enemy_max, add child to loaded_enemies and connect signals
+		if child is CharacterBody2D: 
 			enemy_max += 1
 			_on_enemy_spawned(child)
 		elif child is Area2D:
-			# enemy_max = child.get_enemy_count()
-			# Connect on_enemy_spawned(enemy)
-			# Connect _on_spawner_started(spawner_pos)
-			pass
-
+			enemy_max += child.get_enemy_count()
+			child.enemy_spawned.connect(_on_enemy_spawned)
+			child.spawner_started.connect(_on_spawner_started)
