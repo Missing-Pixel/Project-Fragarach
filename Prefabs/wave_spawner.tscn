@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://blspfy6q3fqxp"]
+
+[ext_resource type="Script" path="res://Scripts/sc_wave_spawner.gd" id="1_ja3jr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c085i"]
+
+[node name="WaveSpawner" type="Area2D"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("1_ja3jr")
+
+[node name="SearchRange" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c085i")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

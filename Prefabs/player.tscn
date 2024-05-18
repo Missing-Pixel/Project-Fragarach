@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="2_hk7pl"]
 [ext_resource type="Script" path="res://Scripts/sc_player_action_manager.gd" id="2_ls36j"]
 [ext_resource type="Script" path="res://Scripts/sc_card_manager.gd" id="2_vr3gl"]
-[ext_resource type="Script" path="res://Prefabs/sc_player_camera.gd" id="3_pjpqq"]
+[ext_resource type="Script" path="res://Scripts/sc_player_camera.gd" id="3_pjpqq"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="4_7b03m"]
 [ext_resource type="Script" path="res://Scripts/sc_hitbox.gd" id="4_kp1b8"]
 [ext_resource type="PackedScene" uid="uid://cgamf07l4b1q" path="res://Prefabs/Data/Attacks/generic_attack.tscn" id="5_l0xqj"]
@@ -314,8 +314,6 @@ collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_ls36j")
 repeat_attack_bonus = 3.0
-last_attack_ids = [2, 3]
-knockdown_last_attack_ids = [2, 3]
 attack_range = NodePath("../AttackRange")
 anim_library = "Player"
 anim_idle = "player_idle"

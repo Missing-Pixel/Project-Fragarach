@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=9 format=3 uid="uid://dfnjtj1tlyohh"]
 
 [ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_ayml0"]
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
-[ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/enemy_generic.tscn" id="2_up4gd"]
+[ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/Enemies/enemy_generic.tscn" id="2_up4gd"]
 [ext_resource type="PackedScene" uid="uid://cxpinssiic54x" path="res://Prefabs/level_hud_prototype.tscn" id="4_sx2jr"]
 [ext_resource type="Script" path="res://Scenes/sc_enemy_list.gd" id="5_gujcx"]
 [ext_resource type="Resource" uid="uid://gjxn0nsx1af5" path="res://Prefabs/Data/EnemyFlags/generic_level.tres" id="6_aeqhy"]
+[ext_resource type="Script" path="res://Scripts/sc_wave_spawner.gd" id="7_2cj0s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c085i"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -23,3 +26,13 @@ player_node = NodePath("../Player")
 [node name="EnemyList" type="Node2D" parent="."]
 script = ExtResource("5_gujcx")
 enemy_flag_resource = ExtResource("6_aeqhy")
+
+[node name="WaveSpawner" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("7_2cj0s")
+
+[node name="SearchRange" type="CollisionShape2D" parent="WaveSpawner"]
+shape = SubResource("RectangleShape2D_c085i")
+
+[connection signal="body_entered" from="WaveSpawner" to="WaveSpawner" method="_on_body_entered"]

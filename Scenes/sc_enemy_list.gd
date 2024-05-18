@@ -19,6 +19,7 @@ var loaded_enemies: Array = []
 func _on_enemy_spawned(enemy):
 	loaded_enemies.append(enemy)
 	# Connect on_character_died, on_player_found, on_player_left
+	enemy.set_speedlag_tag(false, attack_rate_reduce_multiplier, move_speed_reduce_multiplier)
 
 # Set enemy speed based on whether enemy is tagged or not
 func _on_player_found(enemy):
