@@ -4,15 +4,15 @@ extends Node
 
 func update_health():
 	var hp = player_node.node_health_manager.curr_health
-	$Health.text = "Player\nHealth: " + str(hp)
+	$Health.text = "Health: " + str(hp)
 
 func update_attack_queue():
 	var queue = player_node.node_action_manager.attack_queue
-	var output_string = "Attacks: "
+	var output_string = "< "
 	
 	if (queue.size() > 0):
 		for i in queue:
-			output_string += _id_to_string(i+1) + " "
+			output_string += _id_to_string(i+1) + " < "
 		$AttackQueue.text = output_string
 		$AttackQueue.show()
 	else:
@@ -33,12 +33,12 @@ func update_card_slots():
 
 func update_card_combo():
 	var card_queue = player_node.node_card_manager.card_queue
-	var output_text = " "
+	var output_text = ""
 	
 	if (card_queue.size() > 0):
-		output_text = "<Space>\nStart Combo\n"
+		output_text = "<Space>\nStart Combo\n< "
 		for i in card_queue:
-			output_text += str(i) + " "
+			output_text += str(i) + " < "
 		$ReadyCombo.text = output_text
 		$ReadyCombo.show()
 	else:

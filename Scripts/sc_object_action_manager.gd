@@ -4,7 +4,8 @@ extends Node
 ## Need to manually connect the following signals:
 ## AnimationPlayer - animation_finished
 ## Hitbox - body_entered
-## KnockTimer - timeout
+
+signal character_died(node_ref)
 
 @export var attack_range: Node
 @export_group("Animation Names")
@@ -13,14 +14,20 @@ extends Node
 @export var anim_move: String
 @export var anim_knockdown: String
 @export var anim_hitstun: String
+@export var anim_death: String
 # index = ID of attack (int)
 # value = attack animation name (string) 
 @export var anim_attacks: PackedStringArray
+@export_group("Death Animation Settings")
+@export var flicker_total_time: float = 6
+@export var flicker_cycle_count: int = 3
 
 var anim_player: Node
 var hitbox_manager: Node
 var attack_queue: Array = []
 var health_manager: Node
+
+@onready var characterSprite: Node = $CharacterSprite 
 
 # Return count of number of attacks
 func get_attack_count():
@@ -45,6 +52,10 @@ func play_knocked_down():
 # Plays a hitstun animation
 func play_hitstun():
 	_play_animation(anim_hitstun)
+
+# Plays death animation
+func play_death():
+	_play_animation(anim_death)
 
 # Resumes any currently paused animations
 # Mainly for Knocked down animation when it gets paused in animation
@@ -93,6 +104,21 @@ func _reset_attacks():
 	get_parent().change_state(0)
 	play_idle()
 
+# Engage Death animation. Emit signal when done
+func _start_death():
+	var flicker_interval: float = flicker_total_time / (flicker_cycle_count * 2)
+	
+	get_parent().node_health_manager.reset_immunity(100)
+	play_death()
+	
+	# Flicker character
+	for i in range(flicker_cycle_count):
+		characterSprite.visible != characterSprite.visible
+		await get_tree().create_timer(flicker_interval).timeout
+	
+	characterSprite.visible = false
+	character_died.emit(get_parent())
+
 # Attacking: Cycle attack
 # if Knocked Back: Reset kb and immunity. If not knocked down or attacking, reset to idle
 #    if Knocked Down: If health is 0, engage death. Otherwise, reset immunity and attacks
@@ -104,7 +130,7 @@ func _on_animation_player_animation_finished(anim_name):
 		get_parent().node_health_manager.reset_immunity()
 		if (get_parent().view_state() == 3):
 			if (health_manager.view_health() <= 0):
-				pass ## Replace with calling death function
+				_start_death()
 			else:
 				_reset_attacks()
 		elif (get_parent().view_state() != 2):

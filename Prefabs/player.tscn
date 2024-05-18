@@ -314,12 +314,15 @@ collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_ls36j")
 repeat_attack_bonus = 3.0
-last_attack_ids = [2, 2]
+last_attack_ids = [2, 3]
+knockdown_last_attack_ids = [2, 3]
 attack_range = NodePath("../AttackRange")
 anim_library = "Player"
 anim_idle = "player_idle"
 anim_move = "player_move"
+anim_knockdown = "player_kd"
 anim_hitstun = "player_stun"
+anim_death = "player_death"
 anim_attacks = PackedStringArray("player_hpunch", "player_hpunch", "player_hpunch", "player_hpunch")
 
 [node name="PlayerCamera" type="Camera2D" parent="Moves"]

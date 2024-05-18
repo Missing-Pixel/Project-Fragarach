@@ -15,4 +15,5 @@ texture_filter = 1
 [node name="Enemy" parent="." instance=ExtResource("2_up4gd")]
 position = Vector2(407, 2)
 
-[node name="LevelHUDPrototype" parent="." instance=ExtResource("4_sx2jr")]
+[node name="LevelHUDPrototype" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("4_sx2jr")]
+player_node = NodePath("../Player")

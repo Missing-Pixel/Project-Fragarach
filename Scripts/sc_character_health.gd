@@ -22,8 +22,8 @@ func view_health():
 	return curr_health
 
 # Reset immunity timer
-func reset_immunity():
-	curr_immunity = immunity_time
+func reset_immunity(immune_length = immunity_time):
+	curr_immunity = immune_length
 
 # When receiving a damage signal, manage the health and knockback
 # Only when not immune and not being knocked back
