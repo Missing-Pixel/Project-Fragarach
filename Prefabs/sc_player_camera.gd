@@ -8,7 +8,7 @@ extends Camera2D
 @export var default_camera_speed: float = 1
 @export var locking_camera_speed: float = 3
 
-var left_bounds: Node 
+var left_bounds: Node
 var right_bounds: Node
 
 # Update camera limits with new bound values. 
@@ -40,3 +40,6 @@ func _ready():
 	# Setup bound collision margins
 	left_bounds.position.x += camera_collision_margin
 	right_bounds.position.x -= camera_collision_margin
+	
+	# Connect EnemyList's signal to script
+	get_node("/root/EnemyList").enemy_flag_triggered.connect(_on_enemy_flag_triggered)

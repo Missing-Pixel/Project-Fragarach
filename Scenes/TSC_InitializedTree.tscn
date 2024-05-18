@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfnjtj1tlyohh"]
+[gd_scene load_steps=6 format=3 uid="uid://dfnjtj1tlyohh"]
 
 [ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_ayml0"]
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="2_5qtk0"]
 [ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/enemy_generic.tscn" id="2_up4gd"]
 [ext_resource type="PackedScene" uid="uid://cxpinssiic54x" path="res://Prefabs/level_hud_prototype.tscn" id="4_sx2jr"]
+[ext_resource type="Script" path="res://Scenes/sc_enemy_list.gd" id="5_gujcx"]
 
 [node name="InitializedTree" type="Node2D"]
 
@@ -17,3 +18,6 @@ position = Vector2(407, 2)
 
 [node name="LevelHUDPrototype" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("4_sx2jr")]
 player_node = NodePath("../Player")
+
+[node name="EnemyList" type="Node2D" parent="."]
+script = ExtResource("5_gujcx")
