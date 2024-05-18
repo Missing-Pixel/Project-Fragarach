@@ -5,8 +5,6 @@ extends Node
 ## AnimationPlayer - animation_finished
 ## Hitbox - body_entered
 
-signal character_died(node_ref)
-
 @export var attack_range: Node
 @export_group("Animation Names")
 @export var anim_library: String
@@ -107,6 +105,7 @@ func _reset_attacks():
 # Engage Death animation. Emit signal when done
 func _start_death():
 	var flicker_interval: float = flicker_total_time / (flicker_cycle_count * 2)
+	var parent_node = get_parent()
 	
 	get_parent().node_health_manager.reset_immunity(100)
 	play_death()
@@ -117,7 +116,7 @@ func _start_death():
 		await get_tree().create_timer(flicker_interval).timeout
 	
 	characterSprite.visible = false
-	character_died.emit(get_parent())
+	parent_node.character_died.emit(parent_node)
 
 # Attacking: Cycle attack
 # if Knocked Back: Reset kb and immunity. If not knocked down or attacking, reset to idle

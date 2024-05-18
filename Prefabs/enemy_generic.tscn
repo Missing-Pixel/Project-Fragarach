@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bftwiahc0wqag" path="res://Sprites/Player/Fighter_Cross_Punch_Sheet.png" id="3_6acc4"]
 [ext_resource type="Script" path="res://Scripts/sc_hitbox.gd" id="4_sjdbd"]
 [ext_resource type="PackedScene" uid="uid://cgamf07l4b1q" path="res://Prefabs/Data/Attacks/generic_attack.tscn" id="5_osuc2"]
-[ext_resource type="Script" path="res://Scripts/sc_movement.gd" id="6_pqqdn"]
+[ext_resource type="Script" path="res://Scripts/sc_enemy_movement.gd" id="6_sjakk"]
 [ext_resource type="Script" path="res://Scripts/sc_character_health.gd" id="7_3jc63"]
 
 [sub_resource type="Animation" id="Animation_p84m8"]
@@ -357,7 +357,7 @@ shape = SubResource("RectangleShape2D_um4cg")
 debug_color = Color(0, 0.6, 0.701961, 0.133333)
 
 [node name="Movement" type="Node" parent="."]
-script = ExtResource("6_pqqdn")
+script = ExtResource("6_sjakk")
 max_speed = 36.0
 
 [node name="KnockdownTimer" type="Timer" parent="Movement"]

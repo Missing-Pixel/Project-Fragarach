@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://gjxn0nsx1af5"]
+
+[ext_resource type="Script" path="res://Scripts/Data/sc_enemy_flags.gd" id="1_afvc1"]
+
+[resource]
+script = ExtResource("1_afvc1")
+death_milestones = PackedInt32Array()
+left_limits = PackedFloat64Array()
+right_limits = PackedFloat64Array()
+locked_flags = []

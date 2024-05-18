@@ -2,6 +2,8 @@ class_name CharacterStates
 extends Node
 ## Base character state manager
 
+signal character_died(node_ref)
+
 enum States {IDLE=0, MOVING=1, ATTACKING=2, KNOCKED_DOWN=3}
 @export var current_state: States = States.IDLE
 

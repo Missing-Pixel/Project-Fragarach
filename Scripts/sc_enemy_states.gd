@@ -7,6 +7,9 @@ extends CharacterStates
 ## AttackRange - body_entered, body_exited
 ## SearchTimer - timeout
 
+signal player_found(enemy)
+signal player_left(enemy)
+
 @export_group("Movement Detection")
 @export var player_search_period: float = 0.6
 @export var deadzone_range: float = 1 
@@ -20,8 +23,32 @@ var player_position: Array = [0, 0]
 var is_in_deadzone: bool = false
 var is_search_ready: bool = true
 var is_player_in_range: bool = false
+var is_enemy_speedlag_tagged: bool = true
+var speedlag_cooldown_multi: float = 1
+
 @onready var delayed_player_pos: Array = player_position
 @onready var attack_timer: float = attack_cooldown
+
+# Set the attack_cooldown based on reduction multi, and send other values to movement script
+func set_speedlag_tag(is_tagged, cooldown_multi = speedlag_cooldown_multi, speed_multi = 1):
+	if (is_tagged == false):
+		is_enemy_speedlag_tagged = false
+		speedlag_cooldown_multi = cooldown_multi
+		_reset_attack_timer()
+	node_move_manager.set_enemy_speed(is_tagged, speed_multi)
+
+# Returns an array of enemy's maxHP and distance to player
+# Returns [0, 9999] if player isn't in range
+func get_enemy_details():
+	var health: float = node_health_manager.max_health
+	var diff_x: float = player_position[0] - self.global_position.x
+	var diff_y: float = player_position[1] - self.global_position.y
+	var distance: float = sqrt(diff_x**2 + diff_y**2)
+	
+	if (is_player_in_range == false):
+		return 9999
+	else:
+		return [health, distance]
 
 # Connect to body's signal if it isn't already
 func _on_search_range_body_entered(body):
@@ -38,11 +65,13 @@ func _on_search_range_body_exited(body):
 # Set is_player_in_range to true
 func _on_attack_range_body_entered(body):
 	is_player_in_range = true
+	player_found.emit(self)
 
 # Reset attack_timer and set is_player_in_range to false
 func _on_attack_range_body_exited(body):
-	attack_timer = attack_cooldown
+	_reset_attack_timer()
 	is_player_in_range = false
+	player_left.emit(self)
 
 # Update player position
 func _on_player_position_shown(pos):
@@ -95,8 +124,15 @@ func _add_random_attack():
 func _charge_attack(delta):
 	attack_timer -= delta
 	if (attack_timer <= 0):
-		attack_timer = attack_cooldown
+		_reset_attack_timer()
 		_add_random_attack()
+
+# Reset attack_timer based on whether enemy is tagged or not
+func _reset_attack_timer():
+	if (is_enemy_speedlag_tagged == false):
+		attack_timer = attack_cooldown * (1/speedlag_cooldown_multi)
+	else:
+		attack_timer = attack_cooldown
 
 func _process(delta):
 	# While moving: Update all sprite's z-index
