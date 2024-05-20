@@ -75,14 +75,14 @@ func _create_deck():
 func _draw_phase():
 	var rand_index: int = 0
 	
-	# If deck_pile size < 4, pull from discard_pile
-	if (deck_pile.size() < 4):
-		deck_pile += discard_pile
-		discard_pile.clear()
-	
 	# If card slot is empty, draw a card and put it into each card slot
 	for key in card_slots:
 		if (card_slots[key][0] == 0):
+			# If deck is empty, refill from discard pile
+			if (deck_pile.size() <= 0):
+				deck_pile += discard_pile
+				discard_pile.clear()
+			
 			rand_index = randi_range(0, deck_pile.size()-1)
 			card_slots[key][0] = deck_pile[rand_index]
 			deck_pile.remove_at(rand_index)

@@ -19,6 +19,9 @@ enemy_flag_resource = ExtResource("6_aeqhy")
 [node name="Enemy" parent="EnemyList" instance=ExtResource("2_up4gd")]
 position = Vector2(407, 2)
 
+[node name="Enemy2" parent="EnemyList" instance=ExtResource("2_up4gd")]
+position = Vector2(564, -10)
+
 [node name="WaveSpawner" parent="EnemyList" instance=ExtResource("7_5klrk")]
 position = Vector2(-665, -5)
 enemy_prefab_names = PackedStringArray("enemy_generic")
