@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://dh0hhh3pnykn7"]
+[gd_scene load_steps=9 format=3 uid="uid://dh0hhh3pnykn7"]
 
 [ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_di2an"]
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_level_process.gd" id="1_dm86k"]
 [ext_resource type="Script" path="res://Scripts/sc_enemy_list.gd" id="2_5eo4w"]
 [ext_resource type="Resource" uid="uid://gjxn0nsx1af5" path="res://Prefabs/Data/EnemyFlags/generic_level.tres" id="3_6sssg"]
 [ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/Enemies/enemy_generic.tscn" id="4_bw2po"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpinssiic54x" path="res://Prefabs/level_hud_prototype.tscn" id="7_2f5e3"]
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_dm86k")
 
 [node name="BackGroundSprite" parent="." instance=ExtResource("1_di2an")]
 
