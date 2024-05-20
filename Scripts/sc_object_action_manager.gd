@@ -6,6 +6,7 @@ extends Node
 ## Hitbox - body_entered
 
 @export var attack_range: Node
+@export var attack_cooldown: float = 0.1
 @export_group("Animation Names")
 @export var anim_library: String
 @export var anim_idle: String
@@ -24,6 +25,7 @@ var anim_player: Node
 var hitbox_manager: Node
 var attack_queue: Array = []
 var health_manager: Node
+var attack_cooldown_timer: float = 0
 
 @onready var characterSprite: Node = $CharacterSprite 
 
@@ -139,7 +141,7 @@ func _on_animation_player_animation_finished(anim_name):
 # When hitbox connects, and target's base collision is in attack range,
 # relay information to target
 func _on_hitbox_body_entered(body):
-	if (body != self):
+	if (body != self) and (attack_cooldown_timer >= attack_cooldown):
 		if (attack_range.get_overlapping_bodies().has(body.get_parent())):
 			_relay_info(body)
 
@@ -153,3 +155,9 @@ func _ready():
 			hitbox_manager = c
 	await get_tree().create_timer(0.1).timeout
 	health_manager = get_parent().node_health_manager
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	# Reduce attack cooldown
+	if (attack_cooldown_timer < attack_cooldown):
+		attack_cooldown_timer += delta

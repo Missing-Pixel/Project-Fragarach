@@ -46,7 +46,7 @@ func get_enemy_details():
 	var distance: float = sqrt(diff_x**2 + diff_y**2)
 	
 	if (is_player_in_range == false):
-		return 9999
+		return [0, 9999]
 	else:
 		return [health, distance]
 
@@ -69,9 +69,10 @@ func _on_attack_range_body_entered(body):
 
 # Reset attack_timer and set is_player_in_range to false
 func _on_attack_range_body_exited(body):
-	_reset_attack_timer()
-	is_player_in_range = false
-	player_left.emit(self)
+	if (body == player_node):
+		_reset_attack_timer()
+		is_player_in_range = false
+		player_left.emit(self)
 
 # Update player position
 func _on_player_position_shown(pos):

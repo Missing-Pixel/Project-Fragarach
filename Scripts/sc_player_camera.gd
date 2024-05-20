@@ -10,6 +10,11 @@ extends Camera2D
 
 var left_bounds: Node
 var right_bounds: Node
+var node_enemy_list: Node
+
+# Connect EnemyList's signal to script
+func connect_enemy_list():
+	node_enemy_list.enemy_flag_triggered.connect(_on_enemy_flag_triggered)
 
 # Update camera limits with new bound values. 
 # If camera is getting locked, set both limits to left_bound, and increase camera speed
@@ -40,6 +45,3 @@ func _ready():
 	# Setup bound collision margins
 	left_bounds.position.x += camera_collision_margin
 	right_bounds.position.x -= camera_collision_margin
-	
-	# Connect EnemyList's signal to script
-	get_node("/root/EnemyList").enemy_flag_triggered.connect(_on_enemy_flag_triggered)

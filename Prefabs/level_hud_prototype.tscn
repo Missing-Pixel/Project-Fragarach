@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cxpinssiic54x"]
 
-[ext_resource type="Script" path="res://Scripts/MenusAndUI/sc_proto_base.gd" id="1_4gcob"]
+[ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_4gcob"]
 [ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="2_gw3ko"]
 [ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_m7mci"]
 

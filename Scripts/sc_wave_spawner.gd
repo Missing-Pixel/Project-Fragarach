@@ -29,7 +29,7 @@ func get_enemy_count():
 func _on_body_entered(body):
 	get_child(0).disabled = true
 	is_active = true
-	spawner_started.emit(self.x)
+	spawner_started.emit(self.global_position.x)
 
 # Choose random side and random vertical value. Spawn random enemy on that location
 # Emits that enemy spawned
@@ -89,7 +89,7 @@ func _ready():
 	
 	# Load node prefabs into enemy_prefabs array
 	for i in enemy_prefab_names:
-		path_string = enemy_folder_path + i
+		path_string = enemy_folder_path + i + ".tscn"
 		enemy_prefabs.append(load(path_string))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

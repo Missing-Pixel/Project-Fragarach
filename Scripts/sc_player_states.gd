@@ -37,6 +37,8 @@ func _ready():
 	node_move_manager = _child_node_link("update_velocity")
 	node_health_manager = _child_node_link("get_damaged")
 	_list_sprite_nodes()
+	$Moves/PlayerCamera.node_enemy_list = get_node("../EnemyList")
+	$Moves/PlayerCamera.connect_enemy_list()
 	
 	current_state = States.IDLE
 

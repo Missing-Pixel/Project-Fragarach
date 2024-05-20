@@ -12,12 +12,6 @@
 
 [node name="BackGroundSprite" parent="." instance=ExtResource("1_ayml0")]
 
-[node name="Player" parent="." instance=ExtResource("2_5qtk0")]
-texture_filter = 1
-
-[node name="LevelHUDPrototype" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("4_sx2jr")]
-player_node = NodePath("../Player")
-
 [node name="EnemyList" type="Node2D" parent="."]
 script = ExtResource("5_gujcx")
 enemy_flag_resource = ExtResource("6_aeqhy")
@@ -26,3 +20,11 @@ enemy_flag_resource = ExtResource("6_aeqhy")
 position = Vector2(407, 2)
 
 [node name="WaveSpawner" parent="EnemyList" instance=ExtResource("7_5klrk")]
+position = Vector2(-665, -5)
+enemy_prefab_names = PackedStringArray("enemy_generic")
+
+[node name="Player" parent="." instance=ExtResource("2_5qtk0")]
+texture_filter = 1
+
+[node name="LevelHUDPrototype" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("4_sx2jr")]
+player_node = NodePath("../Player")
