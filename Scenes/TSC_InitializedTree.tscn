@@ -8,7 +8,7 @@
 [ext_resource type="Resource" uid="uid://gjxn0nsx1af5" path="res://Prefabs/Data/EnemyFlags/generic_level.tres" id="6_aeqhy"]
 [ext_resource type="PackedScene" uid="uid://blspfy6q3fqxp" path="res://Prefabs/wave_spawner.tscn" id="7_5klrk"]
 
-[node name="InitializedTree" type="Node2D"]
+[node name="TestLevel" type="Node2D"]
 
 [node name="BackGroundSprite" parent="." instance=ExtResource("1_ayml0")]
 
