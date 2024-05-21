@@ -12,7 +12,8 @@ signal player_left(enemy)
 
 @export_group("Movement Detection")
 @export var player_search_period: float = 0.6
-@export var deadzone_range: float = 1 
+@export var deadzone_range: float = 10
+@export var lag_deadzone_range_multiplier: float = 2
 @export var search_timer: Node
 @export_group("Attack Conditions")
 @export var attack_cooldown: float = 0.5
@@ -28,17 +29,24 @@ var speedlag_cooldown_multi: float = 1
 
 @onready var delayed_player_pos: Array = player_position
 @onready var attack_timer: float = attack_cooldown
+@onready var curr_deadzone_range: float = deadzone_range
 
 # Set the attack_cooldown based on reduction multi, and send other values to movement script
 func set_speedlag_tag(is_tagged, cooldown_multi = speedlag_cooldown_multi, speed_multi = 1):
 	if (is_tagged == false):
 		is_enemy_speedlag_tagged = false
 		speedlag_cooldown_multi = cooldown_multi
+		curr_deadzone_range = deadzone_range * lag_deadzone_range_multiplier
+		_reset_attack_timer()
+	else:
+		is_enemy_speedlag_tagged = true
+		speedlag_cooldown_multi = 1
+		curr_deadzone_range = deadzone_range
 		_reset_attack_timer()
 	node_move_manager.set_enemy_speed(is_tagged, speed_multi)
 
 # Returns an array of enemy's maxHP and distance to player
-# Returns [0, 9999] if player isn't in range
+# Returns [0, 9999] if player in't in range
 func get_enemy_details():
 	var health: float = node_health_manager.max_health
 	var diff_x: float = player_position[0] - self.global_position.x
@@ -155,7 +163,7 @@ func _process(delta):
 		if (is_in_deadzone == false):
 			_approach_player()
 		
-		if (_distance_between_pos_2D(delayed_player_pos, self.global_position) < deadzone_range):
+		if (_distance_between_pos_2D(delayed_player_pos, self.global_position) < curr_deadzone_range):
 			is_in_deadzone = true
 			input_velocity = [0, 0]
 		else:
