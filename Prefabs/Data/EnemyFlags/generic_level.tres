@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_afvc1")
-death_milestones = PackedInt32Array()
-left_limits = PackedFloat64Array()
-right_limits = PackedFloat64Array()
+deaths = PackedInt32Array(5, 10)
+left_limits = PackedFloat64Array(50, 60)
+right_limits = PackedFloat64Array(150, 200)
 locked_flags = []

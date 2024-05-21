@@ -37,6 +37,7 @@ texture_filter = 1
 player_node = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 offset_right = 8.0

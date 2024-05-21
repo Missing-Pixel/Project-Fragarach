@@ -57,11 +57,11 @@ func start_knockback(kb_direction, kb_distance, is_knockdown = false):
 		curr_speed = _set_knockback_speed(kd_distance, knockdown_airtime, knockdown_max_speed)
 		is_knocked_down = is_knockdown
 		get_parent().change_state(3)
-		get_parent().node_action_manager.play_knocked_down()
+		get_parent().node_action_manager.interrupt_anim(true)
 		knockdown_timer.start(knockdown_airtime)
 	else:
 		curr_speed = _set_knockback_speed(kb_distance, knockback_time, knockback_max_speed)
-		get_parent().node_action_manager.play_hitstun()
+		get_parent().node_action_manager.interrupt_anim(false)
 	
 
 # Return speed equal to distance/time. Reduce if it exceeds limit

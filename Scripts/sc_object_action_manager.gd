@@ -33,6 +33,14 @@ var attack_cooldown_timer: float = 0
 func get_attack_count():
 	return anim_attacks.size()
 
+# Interrupt a currently playing animation to stun or knockdown
+func interrupt_anim(is_knockdown: bool, keep_state: bool = true):
+	anim_player.stop(keep_state)
+	if (is_knockdown == true):
+		play_knocked_down()
+	else: 
+		play_hitstun()
+
 # Plays idle animation
 func play_idle():
 	_play_animation(anim_idle)
