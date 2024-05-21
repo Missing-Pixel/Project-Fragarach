@@ -17,7 +17,7 @@ signal inputted_start_combo()
 signal inputted_pause_game()
 
 @export var game_state: GameState = GameState.LEVEL
-@export var menu_move_cooldown: float = 0.25
+@export var menu_move_cooldown: float = 0.2
 
 var is_moving: bool = false
 var move_timer: float = 0
@@ -68,14 +68,14 @@ func _emit_menu_move_cursor():
 		vel_angle = _get_simple_angle_degrees(cursor_vel)
 		
 		# Checks angle of vector, and emits signal based on angle
-		if (vel_angle <= 45) or (vel_angle > 315): # Right
+		if (vel_angle <= 45) and (vel_angle > -45): 	# Right
 			inputted_move_cursor.emit(1, 0)
-		elif (vel_angle <= 135) or (vel_angle > 45): # Down
+		elif (vel_angle <= 135) and (vel_angle > 45): 	# Down
 			inputted_move_cursor.emit(0, 1)
-		elif (vel_angle <= 225) or (vel_angle > 135): # Left
-			inputted_move_cursor.emit(-1, 0)
-		if (vel_angle <= 315) or (vel_angle > 225): # Up
+		elif (vel_angle <= -45) and (vel_angle > -135): # Up
 			inputted_move_cursor.emit(0, -1)
+		else: 											# Left
+			inputted_move_cursor.emit(-1, 0)
 
 # Emits menu controls
 func _emit_menu_controls():
@@ -88,8 +88,11 @@ func _emit_menu_controls():
 func _get_simple_angle_degrees(input_vel: Vector2):
 	var angle_rad = input_vel.angle()
 	var angle_deg = angle_rad * 180/PI
-	angle_deg = angle_deg % 360
+	angle_deg = fmod(angle_deg, 360)
 	return angle_deg
+
+func _ready():
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -4,6 +4,7 @@ extends Node2D
 ## All enemies and wave spawners should be children of List
 
 signal enemy_flag_triggered(left_limit, right_limit, is_locked)
+signal level_cleared()
 
 @export var enemy_flag_resource: Resource
 @export_group("Speedlag")
@@ -53,7 +54,7 @@ func _on_character_died(enemy):
 	enemy.queue_free()
 	
 	if (enemy_death_count == enemy_max):
-		pass ## Start the end level sequence
+		level_cleared.emit()
 	else:
 		_check_flags()
 

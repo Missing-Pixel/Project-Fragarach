@@ -21,17 +21,19 @@ func _on_inputted_pause_game():
 
 # Show game over loss screen when player dies
 func _on_player_died(player_node):
-	pass # Show game over loss
+	_trigger_game_over(false)
 
 # Show game win screen when level clears
 func _on_level_clear():
-	pass # Show game over win
+	_trigger_game_over(true)
 
 ## Show game over with appropriate text based on win or loss
-# Pause (true, game over)
-# Show Game Over (win/loss)
-# loss: show loss text
-# win: show win text and emit flag to save data
+func _trigger_game_over(has_won: bool):
+	_toggle_pause(true, game_over)
+	if (has_won == true):
+		game_over.get_node("GameOverLabel").text = "[center]CLEARED"
+	else:
+		game_over.get_node("GameOverLabel").text = "[center]GAME OVER"
 
 # Toggle pause and change input manager states. Open up a starting menu
 func _toggle_pause(will_pause: bool, starting_menu: Node = pause_menu):
@@ -75,7 +77,7 @@ func _ready():
 	if ($Player != null):
 		$Player.character_died.connect(_on_player_died)
 	if ($EnemyList != null):
-		$EnemyList.level_cleared_connect(_on_level_clear)
+		$EnemyList.level_cleared.connect(_on_level_clear)
 	
 	_toggle_pause(false)
 
