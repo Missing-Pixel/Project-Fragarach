@@ -7,6 +7,7 @@ extends Node
 
 @export var attack_range: Node
 @export var attack_cooldown: float = 0.1
+@export_range(0, 1) var immunity_transparancy: float = 0.75
 @export_group("Animation Names")
 @export var anim_library: String
 @export var anim_idle: String
@@ -17,15 +18,13 @@ extends Node
 # index = ID of attack (int)
 # value = attack animation name (string) 
 @export var anim_attacks: PackedStringArray
-@export_group("Death Animation Settings")
-@export var flicker_total_time: float = 6
-@export var flicker_cycle_count: int = 3
 
 var anim_player: Node
 var hitbox_manager: Node
-var attack_queue: Array = []
 var health_manager: Node
+var attack_queue: Array = []
 var attack_cooldown_timer: float = 0
+var enable_immunity_activity: bool = true
 
 @onready var characterSprite: Node = $CharacterSprite 
 
@@ -40,6 +39,14 @@ func interrupt_anim(is_knockdown: bool, keep_state: bool = true):
 		play_knocked_down()
 	else: 
 		play_hitstun()
+
+# Change sprite alpha whenever immunity is up or hitbox is disabled
+func immunity_frames_visual():
+	if (enable_immunity_activity):
+		if ($Hurtbox.disabled == true) or (health_manager.curr_immunity > 0):
+			characterSprite.set_self_modulate(Color(1, 1, 1, immunity_transparancy))
+		else:
+			characterSprite.set_self_modulate(Color(1, 1, 1, 1))
 
 # Plays idle animation
 func play_idle():
@@ -79,6 +86,13 @@ func add_attack(attack_id):
 	else:
 		attack_queue.append(attack_id)
 
+# Emit signal from parent character script to say that character died
+func emit_death():
+	var parent_node = get_parent()
+	
+	characterSprite.set_modulate(Color(1, 1, 1, 0))
+	parent_node.character_died.emit(parent_node)
+
 # General play animation function
 func _play_animation(anim_file_name):
 	var anim_path = anim_library + "/" + anim_file_name
@@ -112,22 +126,6 @@ func _reset_attacks():
 	get_parent().change_state(0)
 	play_idle()
 
-# Engage Death animation. Emit signal when done
-func _start_death():
-	var flicker_interval: float = flicker_total_time / (flicker_cycle_count * 2)
-	var parent_node = get_parent()
-	
-	get_parent().node_health_manager.reset_immunity(100)
-	play_death()
-	
-	# Flicker character
-	for i in range(flicker_cycle_count):
-		characterSprite.visible != characterSprite.visible
-		await get_tree().create_timer(flicker_interval).timeout
-	
-	characterSprite.visible = false
-	parent_node.character_died.emit(parent_node)
-
 # Attacking: Cycle attack
 # if Knocked Back: Reset kb and immunity. If not knocked down or attacking, reset to idle
 #    if Knocked Down: If health is 0, engage death. Otherwise, reset immunity and attacks
@@ -139,7 +137,8 @@ func _on_animation_player_animation_finished(anim_name):
 		get_parent().node_health_manager.reset_immunity()
 		if (get_parent().view_state() == 3):
 			if (health_manager.view_health() <= 0):
-				_start_death()
+				enable_immunity_activity = false
+				play_death()
 			else:
 				_reset_attacks()
 		elif (get_parent().view_state() != 2):
