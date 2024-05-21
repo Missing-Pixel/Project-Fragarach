@@ -2,7 +2,6 @@ class_name MenuControls
 extends Node
 ## Generic controls for a menu
 
-@export var interact_vbox_layout: Node
 @export var default_button: Node
 @export var movement_cooldown: float = 0.25
 
@@ -20,12 +19,12 @@ func _on_inputted_move_cursor(x_diff, y_diff):
 # If canvas is visible, confirm current menu option
 func _on_inputted_confirm_menu():
 	if (self.visible == true) and (current_button != null):
-		pass ## Activate button press
+		current_button.pressed.emit()
 
 # If canvas is visible, cancel menu with default button
 func _on_inputted_cancel_menu():
 	if (self.visible == true) and (default_button != null):
-		pass ## Activate button press
+		default_button.pressed.emit()
 
 # Change current button to new button depending on coordinates
 func _change_button(x, y):
@@ -34,20 +33,20 @@ func _change_button(x, y):
 			current_button = menu_array[y][x]
 			current_coords = [x, y]
 		elif (x >= 0):
-			current_button = menu_array[y][-1]
-			current_coords = [menu_array[y]-1, 1]
+			current_button = menu_array[y][menu_array[y].size()-1]
+			current_coords = [x, menu_array[y].size()-1]
 
 # On ready, create 2D array of menu buttons for player to navigate around 
 func _prepare_array():
 	var curr_row: Array = []
 	
 	menu_array.clear()
-	for row in interact_vbox_layout.get_children():
+	for row in get_children():
 		for cell in row.get_children():
 			## If option is a button
 			curr_row.append(cell)
 		menu_array.append(curr_row)
-		curr_row.clear()
+		curr_row = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -56,6 +55,7 @@ func _ready():
 	Input_Manager.inputted_cancel_menu.connect(_on_inputted_cancel_menu)
 	
 	_prepare_array()
+	print(menu_array)
 	_change_button(0, 0)
 
 

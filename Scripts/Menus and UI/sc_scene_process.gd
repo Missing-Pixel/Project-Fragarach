@@ -26,7 +26,6 @@ func _ready():
 	# Hide process nodes and disable them
 	if (process_nodes.size() > 0):
 		for n in process_nodes:
-			n.process_mode = Node.PROCESS_MODE_WHEN_PAUSED
 			n.set_visible(false)
 			n.set_process(false)
 		

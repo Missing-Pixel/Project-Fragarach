@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dh0hhh3pnykn7"]
+[gd_scene load_steps=10 format=3 uid="uid://dh0hhh3pnykn7"]
 
 [ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_di2an"]
 [ext_resource type="Script" path="res://Scripts/Menus and UI/sc_level_process.gd" id="1_dm86k"]
@@ -7,10 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dcjovovkbs1k2" path="res://Prefabs/Enemies/enemy_generic.tscn" id="4_bw2po"]
 [ext_resource type="PackedScene" uid="uid://blspfy6q3fqxp" path="res://Prefabs/wave_spawner.tscn" id="5_j6cl3"]
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="6_edrvu"]
-[ext_resource type="PackedScene" uid="uid://cxpinssiic54x" path="res://Prefabs/level_hud_prototype.tscn" id="7_2f5e3"]
+[ext_resource type="PackedScene" uid="uid://ccnue8h5xbojr" path="res://Prefabs/hud_prototype.tscn" id="8_ihqgi"]
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_controls.gd" id="9_j0cxm"]
 
-[node name="TestLevel" type="Node2D"]
+[node name="TestLevel" type="Node2D" node_paths=PackedStringArray("canvas_layer", "pause_menu")]
 script = ExtResource("1_dm86k")
+canvas_layer = NodePath("PrototypeHUD")
+pause_menu = NodePath("PrototypeHUD/PauseMenu")
 
 [node name="BackGroundSprite" parent="." instance=ExtResource("1_di2an")]
 
@@ -33,13 +36,37 @@ enemy_counts = PackedInt32Array(4)
 [node name="Player" parent="." instance=ExtResource("6_edrvu")]
 texture_filter = 1
 
-[node name="LevelHUDPrototype" parent="." node_paths=PackedStringArray("player_node") instance=ExtResource("7_2f5e3")]
-player_node = NodePath("../Player")
+[node name="PrototypeHUD" type="CanvasLayer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
+[node name="HUDPrototype" parent="PrototypeHUD" node_paths=PackedStringArray("player_node") instance=ExtResource("8_ihqgi")]
+player_node = NodePath("../../Player")
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_right = 8.0
-offset_bottom = 8.0
-text = "test"
+[node name="PauseMenu" type="VBoxContainer" parent="PrototypeHUD" node_paths=PackedStringArray("default_button")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_j0cxm")
+default_button = NodePath("HBoxContainer/Resume")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer2"]
+layout_mode = 2
+text = "Restart"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
+layout_mode = 2
+
+[node name="Leave" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer3"]
+layout_mode = 2
+text = "Return to
+Main Menu"
+
+[connection signal="pressed" from="PrototypeHUD/PauseMenu/HBoxContainer/Resume" to="." method="_on_resume_pressed"]

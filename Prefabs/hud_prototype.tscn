@@ -1,28 +1,28 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxpinssiic54x"]
+[gd_scene load_steps=4 format=3 uid="uid://ccnue8h5xbojr"]
 
-[ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_4gcob"]
-[ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="2_gw3ko"]
-[ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_m7mci"]
+[ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_c4euo"]
+[ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_0r4l3"]
+[ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="3_brlgo"]
 
-[node name="LevelHUDPrototype" type="CanvasLayer"]
-script = ExtResource("1_4gcob")
+[node name="HUDPrototype" type="Node"]
+script = ExtResource("1_c4euo")
 
 [node name="TopBar" type="Sprite2D" parent="."]
 position = Vector2(640, 40)
 scale = Vector2(4, 4)
-texture = ExtResource("2_m7mci")
+texture = ExtResource("2_0r4l3")
 
 [node name="BottomBar" type="Sprite2D" parent="."]
 position = Vector2(640, 680)
 scale = Vector2(4, 4)
-texture = ExtResource("2_m7mci")
+texture = ExtResource("2_0r4l3")
 
 [node name="Health" type="Label" parent="."]
 offset_left = 9.0
 offset_top = 4.0
 offset_right = 149.0
 offset_bottom = 41.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 theme_override_font_sizes/font_size = 30
 text = "Health: ###"
 
@@ -31,7 +31,7 @@ offset_left = 9.0
 offset_top = 40.0
 offset_right = 116.0
 offset_bottom = 77.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 theme_override_font_sizes/font_size = 30
 text = "Attacks:"
 
@@ -40,7 +40,7 @@ offset_left = 3.0
 offset_top = 650.0
 offset_right = 63.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 text = "Slot 1 - I
 Card: 
 Selected"
@@ -50,7 +50,7 @@ offset_left = 69.0
 offset_top = 649.0
 offset_right = 129.0
 offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 text = "Slot 2 - J
 Card: 
 Selected"
@@ -60,7 +60,7 @@ offset_left = 139.0
 offset_top = 649.0
 offset_right = 201.0
 offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 text = "Slot 3 - K
 Card: 
 Selected"
@@ -70,7 +70,7 @@ offset_left = 209.0
 offset_top = 650.0
 offset_right = 269.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 text = "Slot 4 - L
 Card: 
 Selected"
@@ -80,7 +80,7 @@ offset_left = 278.0
 offset_top = 652.0
 offset_right = 369.0
 offset_bottom = 718.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 text = "<Space>
 Start Combo:
 Card Queue"
@@ -90,7 +90,7 @@ offset_left = 1125.0
 offset_top = 641.0
 offset_right = 1274.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("2_gw3ko")
+theme_override_fonts/font = ExtResource("3_brlgo")
 theme_override_font_sizes/font_size = 29
 text = "Deck: ##
 (Discard: ##)"
