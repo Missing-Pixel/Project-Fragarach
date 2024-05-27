@@ -205,7 +205,6 @@ libraries = {
 "": SubResource("AnimationLibrary_icnig"),
 "Enemy": ExtResource("4_nnc1d")
 }
-autoplay = "Enemy/player_idle"
 
 [node name="Hitbox" type="Area2D" parent="Moves"]
 collision_layer = 4
