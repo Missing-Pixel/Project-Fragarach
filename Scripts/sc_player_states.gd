@@ -19,12 +19,14 @@ func _on_input_select_card(card_slot):
 		node_card_manager.select_card(card_slot)
 
 # Relay initiating combo to card management script
+# Requires cards to be in the queue to start the combo
 func _on_input_start_combo():
 	if (current_state == States.IDLE or current_state == States.MOVING):
-		input_velocity = [0, 0]
-		node_move_manager.update_velocity(0, 0)
-		node_card_manager.start_combo()
-		current_state = States.ATTACKING
+		if (node_card_manager.has_cards() == true):
+			input_velocity = [0, 0]
+			node_move_manager.update_velocity(0, 0)
+			node_card_manager.start_combo()
+			current_state = States.ATTACKING
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

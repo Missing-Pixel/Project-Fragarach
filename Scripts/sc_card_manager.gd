@@ -54,6 +54,13 @@ func discard_front_card():
 		card_state = CardState.DRAW
 		_draw_phase()
 
+# Returns true if card queue has cards, false if it is empty
+func has_cards():
+	if (card_queue.is_empty()):
+		return false
+	else:
+		return true
+
 # Empty entire card queue and put it into discard pile
 func empty_card_queue():
 	while not(card_queue.is_empty()):
