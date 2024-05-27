@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dh0hhh3pnykn7"]
+[gd_scene load_steps=11 format=3 uid="uid://dh0hhh3pnykn7"]
 
 [ext_resource type="PackedScene" uid="uid://c0j427gdhxhk6" path="res://Prefabs/background_tilemap.tscn" id="1_di2an"]
 [ext_resource type="Script" path="res://Scripts/Menus and UI/sc_level_process.gd" id="1_dm86k"]
@@ -8,7 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://blspfy6q3fqxp" path="res://Prefabs/wave_spawner.tscn" id="5_j6cl3"]
 [ext_resource type="PackedScene" uid="uid://3le30i5udicx" path="res://Prefabs/player.tscn" id="6_edrvu"]
 [ext_resource type="PackedScene" uid="uid://ccnue8h5xbojr" path="res://Prefabs/hud_prototype.tscn" id="8_ihqgi"]
-[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_controls.gd" id="9_j0cxm"]
+[ext_resource type="PackedScene" uid="uid://b48qrc5hp0box" path="res://Prefabs/Menus/pause_menu.tscn" id="9_kqh8v"]
+[ext_resource type="PackedScene" uid="uid://fw55mbbyby7n" path="res://Prefabs/Menus/game_over.tscn" id="10_56mcn"]
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("canvas_layer", "pause_menu", "game_over")]
 script = ExtResource("1_dm86k")
@@ -29,7 +30,7 @@ position = Vector2(407, 2)
 position = Vector2(564, -10)
 
 [node name="WaveSpawner" parent="EnemyList" instance=ExtResource("5_j6cl3")]
-position = Vector2(-665, -5)
+position = Vector2(-665, 0)
 vertical_radius_max = 15.0
 enemy_prefab_names = PackedStringArray("enemy_generic")
 enemy_counts = PackedInt32Array(4)
@@ -42,77 +43,6 @@ texture_filter = 1
 [node name="HUDPrototype" parent="PrototypeHUD" node_paths=PackedStringArray("player_node") instance=ExtResource("8_ihqgi")]
 player_node = NodePath("../../Player")
 
-[node name="PauseMenu" type="VBoxContainer" parent="PrototypeHUD" node_paths=PackedStringArray("default_button")]
-offset_right = 1280.0
-offset_bottom = 720.0
-alignment = 1
-script = ExtResource("9_j0cxm")
-default_button = NodePath("HBoxContainer/Resume")
-movement_cooldown = 0.15
-cancel_default_color = Color(1, 0, 0, 1)
-active_color = Color(1, 0.616667, 0, 1)
+[node name="PauseMenu" parent="PrototypeHUD" instance=ExtResource("9_kqh8v")]
 
-[node name="RichTextLabel" type="RichTextLabel" parent="PrototypeHUD/PauseMenu"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]PAUSED"
-fit_content = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
-layout_mode = 2
-alignment = 1
-
-[node name="Resume" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer"]
-layout_mode = 2
-text = "Resume"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
-layout_mode = 2
-alignment = 1
-
-[node name="Restart" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer2"]
-layout_mode = 2
-text = "Restart"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="PrototypeHUD/PauseMenu"]
-layout_mode = 2
-alignment = 1
-
-[node name="Leave" type="Button" parent="PrototypeHUD/PauseMenu/HBoxContainer3"]
-layout_mode = 2
-text = "Return to
-Main Menu"
-
-[node name="GameOver" type="VBoxContainer" parent="PrototypeHUD"]
-offset_right = 1280.0
-offset_bottom = 720.0
-alignment = 1
-script = ExtResource("9_j0cxm")
-movement_cooldown = 0.15
-cancel_default_color = Color(1, 0, 0, 1)
-active_color = Color(1, 0.616667, 0, 1)
-
-[node name="GameOverLabel" type="RichTextLabel" parent="PrototypeHUD/GameOver"]
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]GAME OVER/CLEARED"
-fit_content = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="PrototypeHUD/GameOver"]
-layout_mode = 2
-alignment = 1
-
-[node name="Restart" type="Button" parent="PrototypeHUD/GameOver/HBoxContainer"]
-layout_mode = 2
-text = "Restart"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="PrototypeHUD/GameOver"]
-layout_mode = 2
-alignment = 1
-
-[node name="Leave" type="Button" parent="PrototypeHUD/GameOver/HBoxContainer2"]
-layout_mode = 2
-text = "Return to
-Main Menu"
-
-[connection signal="pressed" from="PrototypeHUD/PauseMenu/HBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[node name="GameOver" parent="PrototypeHUD" instance=ExtResource("10_56mcn")]

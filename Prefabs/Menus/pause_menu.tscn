@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://b48qrc5hp0box"]
+
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_controls.gd" id="1_jrfcr"]
+
+[node name="PauseMenu" type="VBoxContainer" node_paths=PackedStringArray("default_button")]
+offset_right = 1280.0
+offset_bottom = 720.0
+alignment = 1
+script = ExtResource("1_jrfcr")
+default_button = NodePath("HBoxContainer/Resume")
+movement_cooldown = 0.15
+cancel_default_color = Color(1, 0, 0, 1)
+active_color = Color(1, 0.616667, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]PAUSED"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Resume" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+text = "Restart"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Leave" type="Button" parent="HBoxContainer3"]
+layout_mode = 2
+text = "Return to
+Main Menu"
