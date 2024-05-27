@@ -1,9 +1,9 @@
 class_name SceneProcess
 extends Node
-## Base SceneProcess script
-## Only ONE should be active at all times
+## Base script to manage menus and to apply process modes to all nodes in scene
+## Only ONE should be active AND attached to scene node
 
-@export var process_nodes: Array
+@export var process_nodes: Array = []
 @export var active_node: Node = null
 
 # Disables current active node and enables new node inside list

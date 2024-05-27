@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://fw55mbbyby7n"]
+
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_controls.gd" id="1_13xpn"]
+
+[node name="GameOver" type="VBoxContainer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+alignment = 1
+script = ExtResource("1_13xpn")
+movement_cooldown = 0.15
+cancel_default_color = Color(1, 0, 0, 1)
+active_color = Color(1, 0.616667, 0, 1)
+
+[node name="GameOverLabel" type="RichTextLabel" parent="."]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]GAME OVER/CLEARED"
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Restart" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Leave" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+text = "Return to
+Main Menu"

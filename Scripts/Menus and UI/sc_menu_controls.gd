@@ -43,7 +43,7 @@ func _change_button(x, y):
 		if (x >= 0) and (x < menu_array[y].size()):
 			current_button = menu_array[y][x]
 			current_coords = [x, y]
-		elif (x >= 0):
+		elif (x >= 0) and (menu_array[y].size() > 0):
 			current_button = menu_array[y][menu_array[y].size()-1]
 			current_coords = [x, menu_array[y].size()-1]
 	
@@ -58,10 +58,13 @@ func _prepare_array():
 	for row in get_children():
 		if row is HBoxContainer:
 			for cell in row.get_children():
+				# Only add buttons to row array
 				if cell is Button:
 					curr_row.append(cell)
-			menu_array.append(curr_row)
-			curr_row = []
+			# Only add to menu array if row has buttons
+			if (curr_row.size() > 0):
+				menu_array.append(curr_row)
+				curr_row = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
