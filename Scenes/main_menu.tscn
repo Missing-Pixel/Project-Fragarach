@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://4a2cehu3f8pf"]
+
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_process.gd" id="1_cmsam"]
+[ext_resource type="Script" path="res://Scripts/Menus and UI/sc_menu_controls.gd" id="1_isltt"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("canvas_node")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cmsam")
+canvas_node = NodePath("MenuScreen")
+
+[node name="MenuScreen" type="CanvasLayer" parent="."]
+
+[node name="LandingPage" type="VBoxContainer" parent="MenuScreen"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_isltt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuScreen/LandingPage"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuScreen/LandingPage"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuScreen/LandingPage"]
+layout_mode = 2
+
+[node name="DeckSelection" type="VBoxContainer" parent="MenuScreen"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_isltt")
