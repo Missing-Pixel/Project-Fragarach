@@ -151,8 +151,10 @@ func _process(delta):
 	# Switches between IDLE and MOVING states depending on whether player moves
 	if (current_state == States.IDLE and not _check_all_zero(input_velocity)):
 		current_state = States.MOVING
+		node_action_manager.play_moving()
 	elif (current_state == States.MOVING and _check_all_zero(input_velocity)):
 		current_state = States.IDLE
+		node_action_manager.play_idle()
 	
 	# Check if player found and is in IDLE or MOVING state
 	if (player_node != null and (current_state == States.IDLE or current_state == States.MOVING)):
