@@ -87,4 +87,4 @@ func _on_play_game_pressed():
 	get_tree().change_scene_to_file("res://Scenes/test_level.tscn")
 
 func _on_leave_pressed():
-	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
+	get_tree().change_scene_to_file("res://Scenes/main_menu_expanded.tscn")
