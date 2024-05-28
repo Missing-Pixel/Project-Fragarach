@@ -213,3 +213,5 @@ this Deck"
 
 [node name="HSeparator4" type="HSeparator" parent="MenuScreen/DeckSelection"]
 layout_mode = 2
+
+[connection signal="pressed" from="MenuScreen/TitlePage/HBoxContainer2/PlayGame" to="MenuScreen/TitlePage" method="_on_play_game_pressed"]
