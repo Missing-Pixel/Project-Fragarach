@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccnue8h5xbojr"]
+[gd_scene load_steps=5 format=3 uid="uid://ccnue8h5xbojr"]
 
 [ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_c4euo"]
 [ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_0r4l3"]
 [ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="3_brlgo"]
+[ext_resource type="Texture2D" uid="uid://cuxhwwfkvnfl4" path="res://Sprites/UI/Health/UI_Health1.png" id="3_burex"]
 
 [node name="HUDPrototype" type="Node"]
 script = ExtResource("1_c4euo")
@@ -17,20 +18,17 @@ position = Vector2(640, 680)
 scale = Vector2(4, 4)
 texture = ExtResource("2_0r4l3")
 
-[node name="Health" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 4.0
-offset_right = 149.0
-offset_bottom = 41.0
-theme_override_fonts/font = ExtResource("3_brlgo")
-theme_override_font_sizes/font_size = 30
-text = "Health: ###"
+[node name="HealthBar" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(199, 40)
+scale = Vector2(4, 4)
+texture = ExtResource("3_burex")
 
 [node name="AttackQueue" type="Label" parent="."]
-offset_left = 9.0
-offset_top = 40.0
-offset_right = 116.0
-offset_bottom = 77.0
+offset_left = 417.0
+offset_top = 20.0
+offset_right = 524.0
+offset_bottom = 57.0
 theme_override_fonts/font = ExtResource("3_brlgo")
 theme_override_font_sizes/font_size = 30
 text = "Attacks:"

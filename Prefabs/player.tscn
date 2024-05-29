@@ -306,6 +306,7 @@ knockdown_airtime = 0.6
 
 [node name="HealthManager" type="Node" parent="."]
 script = ExtResource("4_7b03m")
+max_health = 50.0
 immunity_time = 0.4
 
 [node name="CardManager" type="Node" parent="."]

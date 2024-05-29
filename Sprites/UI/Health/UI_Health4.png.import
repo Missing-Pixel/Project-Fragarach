@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vwf7g567d2m4"
-path="res://.godot/imported/Fighter_Hurt1.png-135b4c8c4880f63b76acdf784aa47bc5.ctex"
+uid="uid://cgrvbeqjfxiat"
+path="res://.godot/imported/UI_Health4.png-8f490ef1d2d5b95e78106a02281ada9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Hurt/Fighter_Hurt1.png"
-dest_files=["res://.godot/imported/Fighter_Hurt1.png-135b4c8c4880f63b76acdf784aa47bc5.ctex"]
+source_file="res://Sprites/UI/Health/UI_Health4.png"
+dest_files=["res://.godot/imported/UI_Health4.png-8f490ef1d2d5b95e78106a02281ada9c.ctex"]
 
 [params]
 

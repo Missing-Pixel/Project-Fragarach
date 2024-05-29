@@ -1,10 +1,36 @@
 extends Node
 
 @export var player_node: Node
+var health_ui: Array = []
 
 func update_health():
-	var hp = player_node.node_health_manager.curr_health
-	$Health.text = "Health: " + str(hp)
+	var hp: int = player_node.node_health_manager.curr_health
+	
+	# Sorry Traveen, I got lazy :c
+	hp = floor(hp/5)
+	match hp:
+		0:
+			$HealthBar.texture = load(health_ui[0]) 
+		1:
+			$HealthBar.texture = load(health_ui[1]) 
+		2:
+			$HealthBar.texture = load(health_ui[2]) 
+		3:
+			$HealthBar.texture = load(health_ui[3]) 
+		4:
+			$HealthBar.texture = load(health_ui[4]) 
+		5:
+			$HealthBar.texture = load(health_ui[5]) 
+		6:
+			$HealthBar.texture = load(health_ui[6]) 
+		7:
+			$HealthBar.texture = load(health_ui[7]) 
+		8:
+			$HealthBar.texture = load(health_ui[8]) 
+		9:
+			$HealthBar.texture = load(health_ui[9]) 
+		10:
+			$HealthBar.texture = load(health_ui[10]) 
 
 func update_attack_queue():
 	var queue = player_node.node_action_manager.attack_queue
@@ -69,8 +95,28 @@ func _id_to_string(id: int):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	var dir = DirAccess.open("res://Sprites/UI/Health/")
+	var filecount = []
+	
+	# Was commented out because this code does not work on export
+	
+	# Gets the count of files within the "Health" Folder
+	#dir.list_dir_begin()
+	#while true:
+		#var file = dir.get_next()
+		#if file == "":
+			#break
+		#
+		#elif not file.begins_with("."):
+			#if not file.ends_with(".import"):
+				#filecount.append(file)
+	#dir.list_dir_end()
+	
+	# Hardcoded due to above code not working in export, Sorry Traveen :c
+	for i in 11:
+		
+		var getnum = str(i+1)
+		health_ui.append("res://Sprites/UI/Health/UI_Health" + getnum + ".png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
