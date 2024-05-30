@@ -1,9 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://ccnue8h5xbojr"]
+[gd_scene load_steps=16 format=3 uid="uid://ccnue8h5xbojr"]
 
 [ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_c4euo"]
 [ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_0r4l3"]
 [ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="3_brlgo"]
 [ext_resource type="Texture2D" uid="uid://cuxhwwfkvnfl4" path="res://Sprites/UI/Health/UI_Health1.png" id="3_burex"]
+[ext_resource type="Texture2D" uid="uid://cnvmf48dd3ft1" path="res://Sprites/UI/Health/UI_Health2.png" id="5_nfy31"]
+[ext_resource type="Texture2D" uid="uid://dqvto0sounisp" path="res://Sprites/UI/Health/UI_Health3.png" id="6_53oqq"]
+[ext_resource type="Texture2D" uid="uid://cgrvbeqjfxiat" path="res://Sprites/UI/Health/UI_Health4.png" id="7_vhiy5"]
+[ext_resource type="Texture2D" uid="uid://4jh8j27q581j" path="res://Sprites/UI/Health/UI_Health5.png" id="8_pjbuc"]
+[ext_resource type="Texture2D" uid="uid://tsvqrwouydg" path="res://Sprites/UI/Health/UI_Health6.png" id="9_ndis4"]
+[ext_resource type="Texture2D" uid="uid://dp58rqxp33yk" path="res://Sprites/UI/Health/UI_Health7.png" id="10_ql4ss"]
+[ext_resource type="Texture2D" uid="uid://biydfifaimc3n" path="res://Sprites/UI/Health/UI_Health8.png" id="11_ky8gt"]
+[ext_resource type="Texture2D" uid="uid://edkemb4bmw13" path="res://Sprites/UI/Health/UI_Health9.png" id="12_cfi07"]
+[ext_resource type="Texture2D" uid="uid://cyepivm8rhq4r" path="res://Sprites/UI/Health/UI_Health10.png" id="13_ts0x3"]
+[ext_resource type="Texture2D" uid="uid://nw5nktvq3a1d" path="res://Sprites/UI/Health/UI_Health11.png" id="14_0esc6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gnauf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_burex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nfy31")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_53oqq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vhiy5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pjbuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ndis4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ql4ss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ky8gt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cfi07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ts0x3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0esc6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HUDPrototype" type="Node"]
 script = ExtResource("1_c4euo")
@@ -18,11 +69,12 @@ position = Vector2(640, 680)
 scale = Vector2(4, 4)
 texture = ExtResource("2_0r4l3")
 
-[node name="HealthBar" type="Sprite2D" parent="."]
+[node name="HealthBar" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(199, 40)
 scale = Vector2(4, 4)
-texture = ExtResource("3_burex")
+sprite_frames = SubResource("SpriteFrames_gnauf")
+frame = 10
 
 [node name="AttackQueue" type="Label" parent="."]
 offset_left = 417.0

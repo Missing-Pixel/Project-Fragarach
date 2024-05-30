@@ -1,7 +1,6 @@
 extends Node
 
 @export var player_node: Node
-var health_ui: Array = []
 
 func update_health():
 	var hp: int = player_node.node_health_manager.curr_health
@@ -10,27 +9,27 @@ func update_health():
 	hp = floor(hp/5)
 	match hp:
 		0:
-			$HealthBar.texture = load(health_ui[0]) 
+			$HealthBar.frame = 0
 		1:
-			$HealthBar.texture = load(health_ui[1]) 
+			$HealthBar.frame = 1
 		2:
-			$HealthBar.texture = load(health_ui[2]) 
+			$HealthBar.frame = 2
 		3:
-			$HealthBar.texture = load(health_ui[3]) 
+			$HealthBar.frame = 3
 		4:
-			$HealthBar.texture = load(health_ui[4]) 
+			$HealthBar.frame = 4
 		5:
-			$HealthBar.texture = load(health_ui[5]) 
+			$HealthBar.frame = 5
 		6:
-			$HealthBar.texture = load(health_ui[6]) 
+			$HealthBar.frame = 6
 		7:
-			$HealthBar.texture = load(health_ui[7]) 
+			$HealthBar.frame = 7
 		8:
-			$HealthBar.texture = load(health_ui[8]) 
+			$HealthBar.frame = 8
 		9:
-			$HealthBar.texture = load(health_ui[9]) 
+			$HealthBar.frame = 9
 		10:
-			$HealthBar.texture = load(health_ui[10]) 
+			$HealthBar.frame = 10
 
 func update_attack_queue():
 	var queue = player_node.node_action_manager.attack_queue
@@ -111,12 +110,6 @@ func _ready():
 			#if not file.ends_with(".import"):
 				#filecount.append(file)
 	#dir.list_dir_end()
-	
-	# Hardcoded due to above code not working in export, Sorry Traveen :c
-	for i in 11:
-		
-		var getnum = str(i+1)
-		health_ui.append("res://Sprites/UI/Health/UI_Health" + getnum + ".png")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
