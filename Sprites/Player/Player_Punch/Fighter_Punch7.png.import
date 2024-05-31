@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rp2eekh8hyej"
-path="res://.godot/imported/Fighter_Cross_Punch6.png-48608948c704bc88a63cf21a4a2e3121.ctex"
+uid="uid://vhqa4006d3lw"
+path="res://.godot/imported/Fighter_Punch7.png-f98d71510267ce33abff6439053332ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/Player/Player_Punch/Fighter_Cross_Punch6.png"
-dest_files=["res://.godot/imported/Fighter_Cross_Punch6.png-48608948c704bc88a63cf21a4a2e3121.ctex"]
+source_file="res://Sprites/Player/Player_Punch/Fighter_Punch7.png"
+dest_files=["res://.godot/imported/Fighter_Punch7.png-f98d71510267ce33abff6439053332ae.ctex"]
 
 [params]
 
