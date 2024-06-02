@@ -16,14 +16,18 @@ canvas_node = NodePath("MenuScreen")
 [node name="MenuScreen" type="CanvasLayer" parent="."]
 
 [node name="TitlePage" type="VBoxContainer" parent="MenuScreen"]
-visible = false
 offset_right = 1280.0
 offset_bottom = 719.0
 alignment = 1
 script = ExtResource("1_isltt")
 
+[node name="HSeparator" type="HSeparator" parent="MenuScreen/TitlePage"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuScreen/TitlePage"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="TitleText" type="RichTextLabel" parent="MenuScreen/TitlePage/HBoxContainer"]
@@ -34,16 +38,26 @@ text = "[center]Project
 Fragarach"
 fit_content = true
 
+[node name="HSeparator2" type="HSeparator" parent="MenuScreen/TitlePage"]
+custom_minimum_size = Vector2(0, 66.67)
+layout_mode = 2
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="MenuScreen/TitlePage"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="PlayGame" type="Button" parent="MenuScreen/TitlePage/HBoxContainer2"]
 layout_mode = 2
 text = "Play Game"
 
+[node name="HSeparator4" type="HSeparator" parent="MenuScreen/TitlePage"]
+custom_minimum_size = Vector2(0, 28.98)
+layout_mode = 2
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="MenuScreen/TitlePage"]
 layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Credits" type="Button" parent="MenuScreen/TitlePage/HBoxContainer3"]
@@ -54,164 +68,75 @@ text = "Credits"
 layout_mode = 2
 text = "Exit"
 
-[node name="DeckSelection" type="VBoxContainer" parent="MenuScreen" node_paths=PackedStringArray("default_button")]
+[node name="HSeparator3" type="HSeparator" parent="MenuScreen/TitlePage"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+
+[node name="CreditsScreen" type="VBoxContainer" parent="MenuScreen"]
 offset_right = 1280.0
-offset_bottom = 719.0
+offset_bottom = 720.0
 alignment = 1
 script = ExtResource("1_isltt")
-default_button = NodePath("ButtonRowBottom/CancelAndReturn")
 
-[node name="HSeparator" type="HSeparator" parent="MenuScreen/DeckSelection"]
+[node name="HSeparator" type="HSeparator" parent="MenuScreen/CreditsScreen"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
-[node name="ButtonRowPK1" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MenuScreen/CreditsScreen"]
 layout_mode = 2
-alignment = 1
+size_flags_vertical = 3
 
-[node name="MorePunch" type="Button" parent="MenuScreen/DeckSelection/ButtonRowPK1"]
-layout_mode = 2
-text = "+"
-
-[node name="VSeparator" type="VSeparator" parent="MenuScreen/DeckSelection/ButtonRowPK1"]
-custom_minimum_size = Vector2(130, 0)
-layout_mode = 2
-
-[node name="MoreKick" type="Button" parent="MenuScreen/DeckSelection/ButtonRowPK1"]
-layout_mode = 2
-text = "+"
-
-[node name="TextRowPK" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-alignment = 1
-
-[node name="PunchLabel" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowPK"]
+[node name="CreditsTitle" type="RichTextLabel" parent="MenuScreen/CreditsScreen/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 3
 bbcode_enabled = true
-text = "[right]Punch"
-fit_content = true
+text = "[center]CREDITS"
 
-[node name="PunchCount" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowPK"]
-custom_minimum_size = Vector2(100, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuScreen/CreditsScreen"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[center]##"
-fit_content = true
+size_flags_vertical = 3
+alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="MenuScreen/DeckSelection/TextRowPK"]
-custom_minimum_size = Vector2(50, 0)
+[node name="VSeparator" type="VSeparator" parent="MenuScreen/CreditsScreen/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
-[node name="KickCount" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowPK"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-bbcode_enabled = true
-text = "[center]##"
-fit_content = true
-
-[node name="KickLabel" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowPK"]
+[node name="TraveenCredits" type="RichTextLabel" parent="MenuScreen/CreditsScreen/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Kick"
-fit_content = true
+bbcode_enabled = true
+text = "[center]Programming -
+Traveen W."
 
-[node name="ButtonRowPK2" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
+[node name="CodyCredits" type="RichTextLabel" parent="MenuScreen/CreditsScreen/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "[center]Art and Sound -
+Cody A."
+
+[node name="VSeparator2" type="VSeparator" parent="MenuScreen/CreditsScreen/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MenuScreen/CreditsScreen"]
+layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
-[node name="LessPunch" type="Button" parent="MenuScreen/DeckSelection/ButtonRowPK2"]
-layout_mode = 2
-text = "-"
-
-[node name="VSeparator" type="VSeparator" parent="MenuScreen/DeckSelection/ButtonRowPK2"]
-custom_minimum_size = Vector2(490, 0)
+[node name="AIECredits" type="RichTextLabel" parent="MenuScreen/CreditsScreen/HBoxContainer2"]
 layout_mode = 2
 
-[node name="LessKick" type="Button" parent="MenuScreen/DeckSelection/ButtonRowPK2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MenuScreen/CreditsScreen"]
 layout_mode = 2
-text = "-"
-
-[node name="HSeparator2" type="HSeparator" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-
-[node name="ButtonRowHPHK1" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
+size_flags_vertical = 3
 alignment = 1
 
-[node name="MoreHeavyPunch" type="Button" parent="MenuScreen/DeckSelection/ButtonRowHPHK1"]
-layout_mode = 2
-text = "+"
-
-[node name="MoreHeavyKick" type="Button" parent="MenuScreen/DeckSelection/ButtonRowHPHK1"]
-layout_mode = 2
-text = "+"
-
-[node name="TextRowHPHK" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-alignment = 1
-
-[node name="HeavyPunchLabel" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowHPHK"]
-layout_mode = 2
-text = "Heavy Punch"
-
-[node name="HeavyPunchCount" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowHPHK"]
-layout_mode = 2
-text = "##"
-
-[node name="HeavyKickCount" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowHPHK"]
-layout_mode = 2
-text = "##"
-
-[node name="HeavyKickLabel" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowHPHK"]
-layout_mode = 2
-text = "Heavy Kick"
-
-[node name="ButtonRowHPHK2" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-alignment = 1
-
-[node name="LessHeavyPunch" type="Button" parent="MenuScreen/DeckSelection/ButtonRowHPHK2"]
-layout_mode = 2
-text = "-"
-
-[node name="LessHeavyKick" type="Button" parent="MenuScreen/DeckSelection/ButtonRowHPHK2"]
-layout_mode = 2
-text = "-"
-
-[node name="HSeparator3" type="HSeparator" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-
-[node name="TextRowBottomConsole" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-alignment = 1
-
-[node name="DeckConsole" type="RichTextLabel" parent="MenuScreen/DeckSelection/TextRowBottomConsole"]
-layout_mode = 2
-text = "This is a test message"
-
-[node name="ButtonRowBottom" type="HBoxContainer" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-alignment = 1
-
-[node name="CancelAndReturn" type="Button" parent="MenuScreen/DeckSelection/ButtonRowBottom"]
+[node name="Return" type="Button" parent="MenuScreen/CreditsScreen/HBoxContainer3"]
 layout_mode = 2
 text = "Return to
 Main Menu"
 
-[node name="ResetDeck" type="Button" parent="MenuScreen/DeckSelection/ButtonRowBottom"]
+[node name="HSeparator2" type="HSeparator" parent="MenuScreen/CreditsScreen"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
-text = "Reset"
-
-[node name="SaveDeck" type="Button" parent="MenuScreen/DeckSelection/ButtonRowBottom"]
-layout_mode = 2
-text = "Save"
-
-[node name="SaveAndFight" type="Button" parent="MenuScreen/DeckSelection/ButtonRowBottom"]
-layout_mode = 2
-text = "Fight with
-this Deck"
-
-[node name="HSeparator4" type="HSeparator" parent="MenuScreen/DeckSelection"]
-layout_mode = 2
-
-[connection signal="pressed" from="MenuScreen/TitlePage/HBoxContainer2/PlayGame" to="MenuScreen/TitlePage" method="_on_play_game_pressed"]

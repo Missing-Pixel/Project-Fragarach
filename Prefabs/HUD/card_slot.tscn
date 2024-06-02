@@ -24,38 +24,6 @@ animations = [{
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5mb6j"]
 
-[sub_resource type="Animation" id="Animation_yvlii"]
-resource_name = "drawing"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 63), Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_jmdde"]
-resource_name = "select"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Card:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -15)]
-}
-
 [sub_resource type="Animation" id="Animation_1fvel"]
 resource_name = "deselect"
 length = 0.2
@@ -112,6 +80,38 @@ tracks/2/keys = {
 "args": [],
 "method": &"reset_card_visual"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_yvlii"]
+resource_name = "drawing"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 63), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jmdde"]
+resource_name = "select"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Card:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -15)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xik4q"]

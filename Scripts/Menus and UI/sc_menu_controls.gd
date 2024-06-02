@@ -80,11 +80,3 @@ func _ready():
 func _process(delta):
 	if (movement_timer < movement_cooldown):
 		movement_timer += delta
-
-
-# TEMP STUFF FOR GOLD MEETING, DELETE LATER
-func _on_play_game_pressed():
-	get_tree().change_scene_to_file("res://Scenes/test_level.tscn")
-
-func _on_leave_pressed():
-	get_tree().change_scene_to_file("res://Scenes/main_menu_expanded.tscn")

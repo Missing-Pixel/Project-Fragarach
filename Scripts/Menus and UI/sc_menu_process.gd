@@ -4,6 +4,10 @@ extends SceneProcess
 
 @export var canvas_node: Node
 
+# Plays level
+func _on_play_game_pressed():
+	get_tree().change_scene_to_file("res://Scenes/test_level.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Add every child from canvas node to process_nodes before continuing 

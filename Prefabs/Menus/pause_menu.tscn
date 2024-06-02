@@ -42,5 +42,3 @@ alignment = 1
 layout_mode = 2
 text = "Return to
 Main Menu"
-
-[connection signal="pressed" from="HBoxContainer3/Leave" to="." method="_on_leave_pressed"]

@@ -47,3 +47,12 @@ player_node = NodePath("../../Player")
 [node name="PauseMenu" parent="PrototypeHUD" instance=ExtResource("9_kqh8v")]
 
 [node name="GameOver" parent="PrototypeHUD" instance=ExtResource("10_56mcn")]
+
+[connection signal="pressed" from="PrototypeHUD/PauseMenu/HBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PrototypeHUD/PauseMenu/HBoxContainer2/Restart" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="PrototypeHUD/PauseMenu/HBoxContainer3/Leave" to="." method="_on_leave_pressed"]
+[connection signal="pressed" from="PrototypeHUD/GameOver/HBoxContainer/Restart" to="." method="_on_reset_pressed"]
+[connection signal="pressed" from="PrototypeHUD/GameOver/HBoxContainer2/Leave" to="." method="_on_leave_pressed"]
+
+[editable path="PrototypeHUD/PauseMenu"]
+[editable path="PrototypeHUD/GameOver"]
