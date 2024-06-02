@@ -87,50 +87,50 @@ theme_override_font_sizes/font_size = 30
 text = "Attacks:"
 
 [node name="Slot1" type="Label" parent="."]
-offset_left = 3.0
-offset_top = 650.0
-offset_right = 63.0
-offset_bottom = 716.0
+offset_left = 671.0
+offset_top = 648.0
+offset_right = 742.0
+offset_bottom = 714.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 text = "Slot 1 - U
 Card: 
 Selected"
 
 [node name="Slot2" type="Label" parent="."]
-offset_left = 78.0
-offset_top = 649.0
-offset_right = 152.0
-offset_bottom = 715.0
+offset_left = 746.0
+offset_top = 647.0
+offset_right = 820.0
+offset_bottom = 713.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 text = "Slot 2 - I
 Card: 
 Selected"
 
 [node name="Slot3" type="Label" parent="."]
-offset_left = 161.0
-offset_top = 649.0
-offset_right = 235.0
-offset_bottom = 715.0
+offset_left = 829.0
+offset_top = 647.0
+offset_right = 903.0
+offset_bottom = 713.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 text = "Slot 3 - O
 Card: 
 Selected"
 
 [node name="Slot4" type="Label" parent="."]
-offset_left = 245.0
-offset_top = 650.0
-offset_right = 318.0
-offset_bottom = 716.0
+offset_left = 913.0
+offset_top = 648.0
+offset_right = 987.0
+offset_bottom = 714.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 text = "Slot 4 - P
 Card: 
 Selected"
 
 [node name="ReadyCombo" type="Label" parent="."]
-offset_left = 338.0
-offset_top = 648.0
-offset_right = 435.0
-offset_bottom = 714.0
+offset_left = 1006.0
+offset_top = 646.0
+offset_right = 1103.0
+offset_bottom = 712.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 text = "<Space>
 Start Combo:
@@ -138,9 +138,9 @@ Card Queue"
 
 [node name="DeckPiles" type="Label" parent="."]
 offset_left = 1112.0
-offset_top = 641.0
+offset_top = 645.0
 offset_right = 1275.0
-offset_bottom = 716.0
+offset_bottom = 720.0
 theme_override_fonts/font = ExtResource("14_moyhw")
 theme_override_font_sizes/font_size = 29
 text = "Deck: ##
@@ -149,17 +149,17 @@ text = "Deck: ##
 [node name="Slots" type="Node" parent="."]
 
 [node name="CardSlot" parent="Slots" instance=ExtResource("15_hdqsi")]
-position = Vector2(128, 580)
+position = Vector2(73, 616)
 slot_id = 1
 
 [node name="CardSlot2" parent="Slots" instance=ExtResource("15_hdqsi")]
-position = Vector2(300, 580)
+position = Vector2(245, 616)
 slot_id = 2
 
 [node name="CardSlot3" parent="Slots" instance=ExtResource("15_hdqsi")]
-position = Vector2(472, 580)
+position = Vector2(417, 616)
 slot_id = 3
 
 [node name="CardSlot4" parent="Slots" instance=ExtResource("15_hdqsi")]
-position = Vector2(644, 580)
+position = Vector2(589, 616)
 slot_id = 4
