@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ccnue8h5xbojr"]
+[gd_scene load_steps=17 format=3 uid="uid://ccnue8h5xbojr"]
 
 [ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_c4euo"]
 [ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_0r4l3"]
@@ -14,9 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cyepivm8rhq4r" path="res://Sprites/UI/Health/UI_Health10.png" id="13_ts0x3"]
 [ext_resource type="Texture2D" uid="uid://nw5nktvq3a1d" path="res://Sprites/UI/Health/UI_Health11.png" id="14_0esc6"]
 [ext_resource type="FontFile" uid="uid://ccqjjmrh3qq5x" path="res://Other/Fonts/vermin_vibes/Vermin Vibes.ttf" id="14_moyhw"]
-[ext_resource type="Texture2D" uid="uid://chulml34gn1n2" path="res://Sprites/UI/Cards/UI_Card_Blank.png" id="15_gvb1r"]
-[ext_resource type="Texture2D" uid="uid://chmqewowp2vyt" path="res://Sprites/UI/Cards/UI_Card_Kick.png" id="16_b8lnx"]
-[ext_resource type="Texture2D" uid="uid://uoi0fcrsfwvr" path="res://Sprites/UI/Cards/UI_Card_Punch.png" id="17_vrmaq"]
+[ext_resource type="PackedScene" uid="uid://chxduaarn2rhc" path="res://Prefabs/HUD/card_slot.tscn" id="15_hdqsi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnauf"]
 animations = [{
@@ -58,31 +56,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rt536"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("15_gvb1r")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_b8lnx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_vrmaq")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="Animation" id="Animation_yvlii"]
-resource_name = "drawing"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xik4q"]
-_data = {
-"drawing": SubResource("Animation_yvlii")
-}
 
 [node name="HUDPrototype" type="Node"]
 script = ExtResource("1_c4euo")
@@ -173,15 +146,20 @@ theme_override_font_sizes/font_size = 29
 text = "Deck: ##
 (Discard: ##)"
 
-[node name="CardSlot" type="Sprite2D" parent="."]
-scale = Vector2(4, 4)
-texture = ExtResource("15_gvb1r")
+[node name="Slots" type="Node" parent="."]
 
-[node name="Card" type="AnimatedSprite2D" parent="CardSlot"]
-sprite_frames = SubResource("SpriteFrames_rt536")
-frame = 1
+[node name="CardSlot" parent="Slots" instance=ExtResource("15_hdqsi")]
+position = Vector2(128, 580)
+slot_id = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CardSlot"]
-libraries = {
-"Card": SubResource("AnimationLibrary_xik4q")
-}
+[node name="CardSlot2" parent="Slots" instance=ExtResource("15_hdqsi")]
+position = Vector2(300, 580)
+slot_id = 2
+
+[node name="CardSlot3" parent="Slots" instance=ExtResource("15_hdqsi")]
+position = Vector2(472, 580)
+slot_id = 3
+
+[node name="CardSlot4" parent="Slots" instance=ExtResource("15_hdqsi")]
+position = Vector2(644, 580)
+slot_id = 4

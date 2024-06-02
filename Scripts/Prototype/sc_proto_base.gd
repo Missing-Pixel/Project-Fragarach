@@ -2,7 +2,7 @@ extends Node
 
 @export var player_node: Node
 
-#@onready var card_slot_list = [$Slot1, $Slot2, $Slot3, $Slot4]
+@onready var card_slot_list = [$Slots/CardSlot, $Slots/CardSlot2, $Slots/CardSlot3, $Slots/CardSlot4]
 
 # Update health bar based off current hp
 func update_health():
@@ -79,6 +79,9 @@ func _id_to_string(id: int):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for slot in card_slot_list:
+		slot.connect_player(player_node.node_card_manager)
+	
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

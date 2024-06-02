@@ -11,8 +11,9 @@ extends Node
 @export var heavy_kick_count = 2
 @export_group("")
 
-signal added_attack(attack_id)
-enum CardState { DRAW, QUEUE, DISCARD } 
+signal card_slot_changed(slot_id, is_selected, is_discarding, card_id)
+
+enum CardState { DRAW=0, QUEUE=1, DISCARD=2 } 
 enum CardAttacks { PUNCH=1, KICK=2, HEAVY_PUNCH=3, HEAVY_KICK=4}
 var card_state: CardState = CardState.DRAW
 var deck_pile: Array = []
@@ -30,9 +31,11 @@ func select_card(card_slot_value):
 	if (card_state == CardState.QUEUE):
 		if (card_slots[card_slot_value][1] == false):
 			card_slots[card_slot_value][1] = true
+			card_slot_changed.emit(card_slot_value, true)
 			card_queue.append(card_slot_value)
 		else:
 			card_slots[card_slot_value][1] = false
+			card_slot_changed.emit(card_slot_value, false)
 			card_queue.erase(card_slot_value)
 
 # If in queue state, add the active card slots' attack IDs to the attack queue
@@ -49,10 +52,10 @@ func discard_front_card():
 	discard_pile.append(card_slots[k][0])
 	card_slots[k][0] = 0
 	card_slots[k][1] = false
+	card_slot_changed.emit(k, false, true)
 	card_queue.remove_at(0)
 	if card_queue.is_empty():
 		card_state = CardState.DRAW
-		_draw_phase()
 
 # Returns true if card queue has cards, false if it is empty
 func has_cards():
@@ -83,20 +86,23 @@ func _draw_phase():
 	var rand_index: int = 0
 	
 	# If card slot is empty, draw a card and put it into each card slot
-	for key in card_slots:
-		if (card_slots[key][0] == 0):
-			# If deck is empty, refill from discard pile
-			if (deck_pile.size() <= 0):
-				deck_pile += discard_pile
-				discard_pile.clear()
-			
-			rand_index = randi_range(0, deck_pile.size()-1)
-			card_slots[key][0] = deck_pile[rand_index]
-			deck_pile.remove_at(rand_index)
-	
-	card_state = CardState.QUEUE
+	if (card_state == CardState.DRAW):
+		for key in card_slots:
+			if (card_slots[key][0] == 0):
+				# If deck is empty, refill from discard pile
+				if (deck_pile.size() <= 0):
+					deck_pile += discard_pile
+					discard_pile.clear()
+				
+				rand_index = randi_range(0, deck_pile.size()-1)
+				card_slots[key][0] = deck_pile[rand_index]
+				card_slot_changed.emit(key, false, false, deck_pile[rand_index])
+				deck_pile.remove_at(rand_index)
+		
+		card_state = CardState.QUEUE
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	_create_deck()
+	await Engine.get_main_loop().process_frame
 	_draw_phase()
