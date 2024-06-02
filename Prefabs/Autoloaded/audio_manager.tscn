@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv3r4sihujae3"]
+
+[ext_resource type="Script" path="res://Scripts/Autoloaded/sc_audio_manager.gd" id="1_pds8b"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_pds8b")
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"Music"
+
+[node name="SFXChannels" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer6" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer7" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"
+
+[node name="AudioStreamPlayer8" type="AudioStreamPlayer" parent="SFXChannels"]
+bus = &"Sound"

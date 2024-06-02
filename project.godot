@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Input_Manager="*res://Prefabs/Autoloaded/input_manager.tscn"
+Audio_Manager="*res://Prefabs/Autoloaded/audio_manager.tscn"
 
 [display]
 
