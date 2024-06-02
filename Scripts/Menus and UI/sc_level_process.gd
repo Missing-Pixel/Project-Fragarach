@@ -13,10 +13,12 @@ signal level_won(lvl_id)
 
 # Returns to main menu
 func _on_leave_pressed():
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")
 
 # Restarts level
 func _on_reset_pressed():
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://Scenes/test_level.tscn")
 
 # Remove all menus and resume game
