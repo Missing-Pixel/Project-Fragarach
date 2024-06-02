@@ -58,7 +58,11 @@ func play_moving():
 
 # Plays an attacking animation
 func play_next_attack():
-	_play_animation(anim_attacks[0])
+	if (attack_queue.size() > 0):
+		var next_attack = attack_queue[0]
+		_play_animation(anim_attacks[next_attack])
+	else:
+		_play_animation(anim_attacks[0])
 
 # Plays a knockdown animation
 func play_knocked_down():
