@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://ccnue8h5xbojr"]
+[gd_scene load_steps=22 format=3 uid="uid://ccnue8h5xbojr"]
 
 [ext_resource type="Script" path="res://Scripts/Prototype/sc_proto_base.gd" id="1_c4euo"]
 [ext_resource type="Texture2D" uid="uid://duhepon7yu1e6" path="res://Sprites/Level/BG/Background_Bar.png" id="2_0r4l3"]
-[ext_resource type="FontFile" uid="uid://bcluggb067ur5" path="res://Other/Fonts/coolvetica/coolvetica rg.otf" id="3_brlgo"]
 [ext_resource type="Texture2D" uid="uid://cuxhwwfkvnfl4" path="res://Sprites/UI/Health/UI_Health1.png" id="3_burex"]
 [ext_resource type="Texture2D" uid="uid://cnvmf48dd3ft1" path="res://Sprites/UI/Health/UI_Health2.png" id="5_nfy31"]
 [ext_resource type="Texture2D" uid="uid://dqvto0sounisp" path="res://Sprites/UI/Health/UI_Health3.png" id="6_53oqq"]
@@ -14,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://edkemb4bmw13" path="res://Sprites/UI/Health/UI_Health9.png" id="12_cfi07"]
 [ext_resource type="Texture2D" uid="uid://cyepivm8rhq4r" path="res://Sprites/UI/Health/UI_Health10.png" id="13_ts0x3"]
 [ext_resource type="Texture2D" uid="uid://nw5nktvq3a1d" path="res://Sprites/UI/Health/UI_Health11.png" id="14_0esc6"]
+[ext_resource type="FontFile" uid="uid://ccqjjmrh3qq5x" path="res://Other/Fonts/vermin_vibes/Vermin Vibes.ttf" id="14_moyhw"]
+[ext_resource type="Texture2D" uid="uid://chulml34gn1n2" path="res://Sprites/UI/Cards/UI_Card_Blank.png" id="15_gvb1r"]
+[ext_resource type="Texture2D" uid="uid://chmqewowp2vyt" path="res://Sprites/UI/Cards/UI_Card_Kick.png" id="16_b8lnx"]
+[ext_resource type="Texture2D" uid="uid://uoi0fcrsfwvr" path="res://Sprites/UI/Cards/UI_Card_Punch.png" id="17_vrmaq"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gnauf"]
 animations = [{
@@ -56,6 +59,31 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_rt536"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_gvb1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_b8lnx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vrmaq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_yvlii"]
+resource_name = "drawing"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xik4q"]
+_data = {
+"drawing": SubResource("Animation_yvlii")
+}
+
 [node name="HUDPrototype" type="Node"]
 script = ExtResource("1_c4euo")
 
@@ -71,17 +99,17 @@ texture = ExtResource("2_0r4l3")
 
 [node name="HealthBar" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(199, 40)
+position = Vector2(191, 40)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_gnauf")
 frame = 10
 
 [node name="AttackQueue" type="Label" parent="."]
-offset_left = 417.0
-offset_top = 20.0
-offset_right = 524.0
-offset_bottom = 57.0
-theme_override_fonts/font = ExtResource("3_brlgo")
+offset_left = 383.0
+offset_top = 24.0
+offset_right = 508.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource("14_moyhw")
 theme_override_font_sizes/font_size = 30
 text = "Attacks:"
 
@@ -90,57 +118,70 @@ offset_left = 3.0
 offset_top = 650.0
 offset_right = 63.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_brlgo")
-text = "Slot 1 - I
+theme_override_fonts/font = ExtResource("14_moyhw")
+text = "Slot 1 - U
 Card: 
 Selected"
 
 [node name="Slot2" type="Label" parent="."]
-offset_left = 69.0
+offset_left = 78.0
 offset_top = 649.0
-offset_right = 129.0
+offset_right = 152.0
 offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("3_brlgo")
-text = "Slot 2 - J
+theme_override_fonts/font = ExtResource("14_moyhw")
+text = "Slot 2 - I
 Card: 
 Selected"
 
 [node name="Slot3" type="Label" parent="."]
-offset_left = 139.0
+offset_left = 161.0
 offset_top = 649.0
-offset_right = 201.0
+offset_right = 235.0
 offset_bottom = 715.0
-theme_override_fonts/font = ExtResource("3_brlgo")
-text = "Slot 3 - K
+theme_override_fonts/font = ExtResource("14_moyhw")
+text = "Slot 3 - O
 Card: 
 Selected"
 
 [node name="Slot4" type="Label" parent="."]
-offset_left = 209.0
+offset_left = 245.0
 offset_top = 650.0
-offset_right = 269.0
+offset_right = 318.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_brlgo")
-text = "Slot 4 - L
+theme_override_fonts/font = ExtResource("14_moyhw")
+text = "Slot 4 - P
 Card: 
 Selected"
 
 [node name="ReadyCombo" type="Label" parent="."]
-offset_left = 278.0
-offset_top = 652.0
-offset_right = 369.0
-offset_bottom = 718.0
-theme_override_fonts/font = ExtResource("3_brlgo")
+offset_left = 338.0
+offset_top = 648.0
+offset_right = 435.0
+offset_bottom = 714.0
+theme_override_fonts/font = ExtResource("14_moyhw")
 text = "<Space>
 Start Combo:
 Card Queue"
 
 [node name="DeckPiles" type="Label" parent="."]
-offset_left = 1125.0
+offset_left = 1112.0
 offset_top = 641.0
-offset_right = 1274.0
+offset_right = 1275.0
 offset_bottom = 716.0
-theme_override_fonts/font = ExtResource("3_brlgo")
+theme_override_fonts/font = ExtResource("14_moyhw")
 theme_override_font_sizes/font_size = 29
 text = "Deck: ##
 (Discard: ##)"
+
+[node name="CardSlot" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("15_gvb1r")
+
+[node name="Card" type="AnimatedSprite2D" parent="CardSlot"]
+sprite_frames = SubResource("SpriteFrames_rt536")
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CardSlot"]
+libraries = {
+"Card": SubResource("AnimationLibrary_xik4q")
+}

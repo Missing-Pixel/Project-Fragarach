@@ -40,3 +40,6 @@ func resume_current_music():
 	if (music_stream_player.playing == false):
 		music_pause_point = 0
 		music_stream_player.play()
+
+func _ready():
+	self.process_mode = Node.PROCESS_MODE_ALWAYS

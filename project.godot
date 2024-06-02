@@ -113,3 +113,7 @@ window/stretch/mode="canvas_items"
 2d_physics/layer_6="enemy_collision"
 2d_physics/layer_7="camera_lock"
 2d_physics/layer_8="level_transition"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
