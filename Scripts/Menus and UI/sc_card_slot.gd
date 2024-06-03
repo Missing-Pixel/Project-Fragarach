@@ -60,6 +60,7 @@ func _discard_card():
 func _play_card_selection(select_state):
 	if (select_state == true):
 		_play_animation(anim_select)
+		Audio_Manager.play_sound("SFX_Card")
 	else:
 		_play_animation(anim_deselect)
 

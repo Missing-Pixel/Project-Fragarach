@@ -58,6 +58,7 @@ func play_moving():
 
 # Plays an attacking animation
 func play_next_attack():
+	Audio_Manager.play_sound("SFX_Punch")
 	if (attack_queue.size() > 0):
 		var next_attack = attack_queue[0]
 		_play_animation(anim_attacks[next_attack])
@@ -66,10 +67,12 @@ func play_next_attack():
 
 # Plays a knockdown animation
 func play_knocked_down():
+	Audio_Manager.play_sound("SFX_Death")
 	_play_animation(anim_knockdown)
 
 # Plays a hitstun animation
 func play_hitstun():
+	Audio_Manager.play_sound("SFX_Hurt")
 	_play_animation(anim_hitstun)
 
 # Plays death animation

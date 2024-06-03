@@ -10,18 +10,22 @@ extends SceneProcess
 # Plays level
 func _on_play_game_pressed():
 	get_tree().change_scene_to_file("res://Scenes/test_level.tscn")
+	Audio_Manager.play_sound("SFX_Menu")
 
 # Switch to Credits screen
 func _on_credits_menu_pressed():
 	switch_nodes(title_page)
+	Audio_Manager.play_sound("SFX_Menu")
 
 # Switch to Title screen
 func _on_title_menu_presssed():
 	switch_nodes(credits_page)
+	Audio_Manager.play_sound("SFX_Menu")
 
 # Exit game
 func _on_exit_game_pressed():
 	get_tree().quit()
+	Audio_Manager.play_sound("SFX_Menu")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
